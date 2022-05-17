@@ -1,0 +1,574 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Aismy">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="JWT 实战教程 1.什么是JWTJSON Web Token (JWT) is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. This informat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JWT实战教程">
+<meta property="og:url" content="http://example.com/2022/01/17/JWT%E5%AE%9E%E6%88%98%E6%95%99%E7%A8%8B/index.html">
+<meta property="og:site_name" content="AISMY">
+<meta property="og:description" content="JWT 实战教程 1.什么是JWTJSON Web Token (JWT) is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. This informat">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://img.aismy.top/img/image-20220517232902435.png">
+<meta property="article:published_time" content="2022-01-17T15:23:22.000Z">
+<meta property="article:modified_time" content="2022-05-17T15:29:30.494Z">
+<meta property="article:author" content="Aismy">
+<meta property="article:tag" content="token">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://img.aismy.top/img/image-20220517232902435.png">
+  
+  
+  <title>JWT实战教程 - AISMY</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Aismy</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://api.ixiaowai.cn/api/api.php') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JWT实战教程">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-01-17 23:23" pubdate>
+        2022年1月17日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      15k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      127 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JWT实战教程</h1>
+            
+            <div class="markdown-body">
+              <h1 id="JWT-实战教程"><a href="#JWT-实战教程" class="headerlink" title="JWT 实战教程"></a>JWT 实战教程</h1><p><img src="http://img.aismy.top/img/image-20200726102546868.png" srcset="/img/loading.gif" lazyload alt="image-20200726102546868"></p>
+<h2 id="1-什么是JWT"><a href="#1-什么是JWT" class="headerlink" title="1.什么是JWT"></a>1.什么是JWT</h2><p>JSON Web Token (JWT) is an open standard (<a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc7519">RFC 7519</a>) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. This information can be verified and trusted because it is digitally signed. JWTs can be signed using a secret (with the <strong>HMAC</strong> algorithm) or a public/private key pair using <strong>RSA</strong> or <strong>ECDSA</strong>.</p>
+<p>​                                                                                                                                                                                                                                            —[摘自官网]</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-section"># 1.翻译</span><br><span class="hljs-bullet">-</span>  官网地址: https://jwt.io/introduction/<br><span class="hljs-bullet">-</span>  翻译: jsonwebtoken（JWT）是一个开放标准（rfc7519），它定义了一种紧凑的、自包含的方式，用于在各方之间以JSON对象安全地传输信息。此信息可以验证和信任，因为它是数字签名的。jwt可以使用秘密（使用HMAC算法）或使用RSA或ECDSA的公钥/私钥对进行签名<br><br><span class="hljs-section"># 2.通俗解释</span><br><span class="hljs-bullet">-</span> JWT简称JSON Web Token,也就是通过JSON形式作为Web应用中的令牌,用于在各方之间安全地将信息作为JSON对象传输。在数据传输过程中还可以完成数据加密、签名等相关处理。<br></code></pre></td></tr></table></figure>
+
+<h2 id="2-JWT能做什么"><a href="#2-JWT能做什么" class="headerlink" title="2.JWT能做什么"></a>2.JWT能做什么</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-section"># 1.授权</span><br><span class="hljs-bullet">-</span> 这是使用JWT的最常见方案。一旦用户登录，每个后续请求将包括JWT，从而允许用户访问该令牌允许的路由，服务和资源。单点登录是当今广泛使用JWT的一项功能，因为它的开销很小并且可以在不同的域中轻松使用。<br><br><span class="hljs-section"># 2.信息交换</span><br><span class="hljs-bullet">-</span> JSON Web Token是在各方之间安全地传输信息的好方法。因为可以对JWT进行签名（例如，使用公钥/私钥对），所以您可以确保发件人是他们所说的人。此外，由于签名是使用标头和有效负载计算的，因此您还可以验证内容是否遭到篡改。<br></code></pre></td></tr></table></figure>
+
+<h2 id="3-为什么是JWT"><a href="#3-为什么是JWT" class="headerlink" title="3.为什么是JWT"></a>3.为什么是JWT</h2><h3 id="基于传统的Session认证"><a href="#基于传统的Session认证" class="headerlink" title="基于传统的Session认证"></a>基于传统的Session认证</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-section"># 1.认证方式</span><br><span class="hljs-bullet">-</span> 我们知道，http协议本身是一种无状态的协议，而这就意味着如果用户向我们的应用提供了用户名和密码来进行用户认证，那么下一次请求时，用户还要再一次进行用户认证才行，因为根据http协议，我们并不能知道是哪个用户发出的请求，所以为了让我们的应用能识别是哪个用户发出的请求，我们只能在服务器存储一份用户登录的信息，这份登录信息会在响应时传递给浏览器，告诉其保存为cookie,以便下次请求时发送给我们的应用，这样我们的应用就能识别请求来自哪个用户了,这就是传统的基于session认证。<br>t<br><span class="hljs-section"># 2.认证流程</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="http://img.aismy.top/img/image-20200726103959013.png" srcset="/img/loading.gif" lazyload alt="image-20200726103959013"></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-section"># 3.暴露问题</span><br><span class="hljs-bullet">-</span> 1.每个用户经过我们的应用认证之后，我们的应用都要在服务端做一次记录，以方便用户下次请求的鉴别，通常而言session都是保存在内存中，而随着认证用户的增多，服务端的开销会明显增大<br><br><span class="hljs-bullet">-</span> 2.用户认证之后，服务端做认证记录，如果认证的记录被保存在内存中的话，这意味着用户下次请求还必须要请求在这台服务器上,这样才能拿到授权的资源，这样在分布式的应用上，相应的限制了负载均衡器的能力。这也意味着限制了应用的扩展能力。<br><br><span class="hljs-bullet">-</span> 3.因为是基于cookie来进行用户识别的, cookie如果被截获，用户就会很容易受到跨站请求伪造的攻击。<br><br><span class="hljs-bullet">-</span> 4.在前后端分离系统中就更加痛苦:如下图所示<br><span class="hljs-code">	也就是说前后端分离在应用解耦后增加了部署的复杂性。通常用户一次请求就要转发多次。如果用session 每次携带sessionid 到服务	器，服务器还要查询用户信息。同时如果用户很多。这些信息存储在服务器内存中，给服务器增加负担。还有就是CSRF（跨站伪造请求攻	击）攻击，session是基于cookie进行用户识别的, cookie如果被截获，用户就会很容易受到跨站请求伪造的攻击。还有就是	     sessionid就是一个特征值，表达的信息不够丰富。不容易扩展。而且如果你后端应用是多节点部署。那么就需要实现session共享机制。	不方便集群应用。</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="http://img.aismy.top/img/image-20200804212240422.png" srcset="/img/loading.gif" lazyload alt="image-20200804212240422"></p>
+<h3 id="基于JWT认证"><a href="#基于JWT认证" class="headerlink" title="基于JWT认证"></a>基于JWT认证</h3><p><img src="http://img.aismy.top/img/image-20200726183248298.png" srcset="/img/loading.gif" lazyload alt="image-20200726183248298"></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-section"># 1.认证流程</span><br><span class="hljs-bullet">-</span> 首先，前端通过Web表单将自己的用户名和密码发送到后端的接口。这一过程一般是一个HTTP POST请求。建议的方式是通过SSL加密的传输（https协议），从而避免敏感信息被嗅探。<br><span class="hljs-bullet">-</span> 后端核对用户名和密码成功后，将用户的id等其他信息作为JWT Payload（负载），将其与头部分别进行Base64编码拼接后签名，形成一个JWT(Token)。形成的JWT就是一个形同lll.zzz.xxx的字符串。 token head.payload.singurater<br><br><span class="hljs-bullet">-</span> 后端将JWT字符串作为登录成功的返回结果返回给前端。前端可以将返回的结果保存在localStorage或sessionStorage上，退出登录时前端删除保存的JWT即可。<br><br><span class="hljs-bullet">-</span> 前端在每次请求时将JWT放入HTTP Header中的Authorization位。(解决XSS和XSRF问题) HEADER<br><br><span class="hljs-bullet">-</span> 后端检查是否存在，如存在验证JWT的有效性。例如，检查签名是否正确；检查Token是否过期；检查Token的接收方是否是自己（可选）。<br><span class="hljs-bullet">-</span> 验证通过后后端使用JWT中包含的用户信息进行其他逻辑操作，返回相应结果。<br><br><span class="hljs-section"># 2.jwt优势</span><br><br><span class="hljs-bullet">-</span> 简洁(Compact): 可以通过URL，POST参数或者在HTTP header发送，因为数据量小，传输速度也很快<br><br><span class="hljs-bullet">-</span> 自包含(Self-contained)：负载中包含了所有用户所需要的信息，避免了多次查询数据库<br><br><span class="hljs-bullet">-</span> 因为Token是以JSON加密的形式保存在客户端的，所以JWT是跨语言的，原则上任何web形式都支持。<br><br><span class="hljs-bullet">-</span> 不需要在服务端保存会话信息，特别适用于分布式微服务。<br></code></pre></td></tr></table></figure>
+
+<h2 id="4-JWT的结构是什么"><a href="#4-JWT的结构是什么" class="headerlink" title="4.JWT的结构是什么?"></a>4.JWT的结构是什么?</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs markdown">token   string  ====&gt;  header.payload.singnature   token   <br><br><span class="hljs-section"># 1.令牌组成</span><br><span class="hljs-bullet">-</span> 1.标头(Header)<br><span class="hljs-bullet">-</span> 2.有效载荷(Payload)<br><span class="hljs-bullet">-</span> 3.签名(Signature)<br><span class="hljs-bullet">-</span> 因此，JWT通常如下所示:xxxxx.yyyyy.zzzzz   Header.Payload.Signature<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-section"># 2.Header</span><br><span class="hljs-bullet">-</span> 标头通常由两部分组成：令牌的类型（即JWT）和所使用的签名算法，例如HMAC SHA256或RSA。它会使用 Base64 编码组成 JWT 结构的第一部分。<br><br><span class="hljs-bullet">-</span> 注意:Base64是一种编码，也就是说，它是可以被翻译回原来的样子来的。它并不是一种加密过程。<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;alg&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;HS256&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;typ&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;JWT&quot;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-section"># 3.Payload</span><br><span class="hljs-bullet">-</span> 令牌的第二部分是有效负载，其中包含声明。声明是有关实体（通常是用户）和其他数据的声明。同样的，它会使用 Base64 编码组成 JWT 结构的第二部分<br><br><span class="hljs-bullet">1.</span> 标准的声明，类似开发语言总的关键字。包括<br>iss（Issuser） - 签发者<br>sub Subject 面向主题<br>aud Audience 接收方<br>exp Expiration time 过期时间戳<br>nbf Not Before, 开始生效时间戳<br>iat(Issued at) 签发时间<br><span class="hljs-bullet">2.</span> 公共的声明： 一般添加业务相关的必要信息，因为可解密，不建议敏感信息。<br><span class="hljs-bullet">3.</span> 私有的声明：提供者和消费者共同定义的声明，Base64对称解密，不建议敏感信息<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;sub&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1234567890&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;John Doe&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;admin&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">true</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-section"># 4.Signature</span><br><span class="hljs-bullet">-</span> 前面两部分都是使用 Base64 进行编码的，即前端可以解开知道里面的信息。Signature 需要使用编码后的 header 和 payload 以及我们提供的一个密钥，然后使用 header 中指定的签名算法（HS256）进行签名。签名的作用是保证 JWT 没有被篡改过<br><span class="hljs-bullet">-</span> 如:<br><span class="hljs-code">	HMACSHA256(base64UrlEncode(header) + &quot;.&quot; + base64UrlEncode(payload),secret);</span><br><span class="hljs-code"></span><br><span class="hljs-section"># 签名目的</span><br><span class="hljs-bullet">-</span> 最后一步签名的过程，实际上是对头部以及负载内容进行签名，防止内容被窜改。如果有人对头部以及负载的内容解码之后进行修改，再进行编码，最后加上之前的签名组合形成新的JWT的话，那么服务器端会判断出新的头部和负载形成的签名和JWT附带上的签名是不一样的。如果要对新的头部和负载进行签名，在不知道服务器加密时用的密钥的话，得出来的签名也是不一样的。<br><br><span class="hljs-section"># 信息安全问题</span><br><span class="hljs-bullet">-</span> 在这里大家一定会问一个问题：Base64是一种编码，是可逆的，那么我的信息不就被暴露了吗？<br><br><span class="hljs-bullet">-</span> 是的。所以，在JWT中，不应该在负载里面加入任何敏感的数据。在上面的例子中，我们传输的是用户的User ID。这个值实际上不是什么敏	感内容，一般情况下被知道也是安全的。但是像密码这样的内容就不能被放在JWT中了。如果将用户的密码放在了JWT中，那么怀有恶意的第	三方通过Base64解码就能很快地知道你的密码了。因此JWT适合用于向Web应用传递一些非敏感信息。JWT还经常用于设计用户认证和授权系	统，甚至实现Web应用的单点登录。<br></code></pre></td></tr></table></figure>
+
+<p><img src="http://img.aismy.top/img/image-20200726181136113.png" srcset="/img/loading.gif" lazyload alt="image-20200726181136113"></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-section"># 5.放在一起</span><br><span class="hljs-bullet">-</span> 输出是三个由点分隔的Base64-URL字符串，可以在HTML和HTTP环境中轻松传递这些字符串，与基于XML的标准（例如SAML）相比，它更紧凑。<br><span class="hljs-bullet">-</span> 简洁(Compact)<br><span class="hljs-code">	可以通过URL, POST 参数或者在 HTTP header 发送，因为数据量小，传输速度快</span><br><span class="hljs-code">- 自包含(Self-contained)</span><br><span class="hljs-code">	负载中包含了所有用户所需要的信息，避免了多次查询数据库</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="http://img.aismy.top/img/image-20200726124257203.png" srcset="/img/loading.gif" lazyload alt="image-20200726124257203"></p>
+<h2 id="5-使用JWT"><a href="#5-使用JWT" class="headerlink" title="5.使用JWT"></a>5.使用JWT</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-section"># 1.引入依赖</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!--引入jwt--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.auth0<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>java-jwt<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.4.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-section"># 2.生成token</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Calendar</span> <span class="hljs-variable">instance</span> <span class="hljs-operator">=</span> Calendar.getInstance();<br>instance.add(Calendar.SECOND, <span class="hljs-number">90</span>);<br><span class="hljs-comment">//生成令牌</span><br><span class="hljs-type">String</span> <span class="hljs-variable">token</span> <span class="hljs-operator">=</span> JWT.create()<br>  .withClaim(<span class="hljs-string">&quot;username&quot;</span>, <span class="hljs-string">&quot;张三&quot;</span>)<span class="hljs-comment">//设置自定义用户名</span><br>  .withExpiresAt(instance.getTime())<span class="hljs-comment">//设置过期时间</span><br>  .sign(Algorithm.HMAC256(<span class="hljs-string">&quot;token!Q2W#E$RW&quot;</span>));<span class="hljs-comment">//设置签名 保密 复杂</span><br><span class="hljs-comment">//输出令牌</span><br>System.out.println(token);<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-bullet">-</span> 生成结果<br>eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOlsicGhvbmUiLCIxNDMyMzIzNDEzNCJdLCJleHAiOjE1OTU3Mzk0NDIsInVzZXJuYW1lIjoi5byg5LiJIn0.aHmE3RNqvAjFr<span class="hljs-emphasis">_dvyn_</span>sD2VJ46P7EGiS5OBMO<span class="hljs-emphasis">_TI5jg</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-section"># 3.根据令牌和签名解析数据</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">JWTVerifier</span> <span class="hljs-variable">jwtVerifier</span> <span class="hljs-operator">=</span> JWT.require(Algorithm.HMAC256(<span class="hljs-string">&quot;token!Q2W#E$RW&quot;</span>)).build();<br><span class="hljs-type">DecodedJWT</span> <span class="hljs-variable">decodedJWT</span> <span class="hljs-operator">=</span> jwtVerifier.verify(token);<br>System.out.println(<span class="hljs-string">&quot;用户名: &quot;</span> + decodedJWT.getClaim(<span class="hljs-string">&quot;username&quot;</span>).asString());<br>System.out.println(<span class="hljs-string">&quot;过期时间: &quot;</span>+decodedJWT.getExpiresAt());<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-section"># 4.常见异常信息</span><br><span class="hljs-bullet">-</span> SignatureVerificationException:				签名不一致异常<br><span class="hljs-bullet">-</span> TokenExpiredException:    						令牌过期异常<br><span class="hljs-bullet">-</span> AlgorithmMismatchException:						算法不匹配异常<br><span class="hljs-bullet">-</span> InvalidClaimException:								失效的payload异常<br></code></pre></td></tr></table></figure>
+
+<p><img src="http://img.aismy.top/img/image-20200805184517282.png" srcset="/img/loading.gif" lazyload alt="image-20200805184517282"></p>
+<h2 id="6-封装工具类"><a href="#6-封装工具类" class="headerlink" title="6.封装工具类"></a>6.封装工具类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">JWTUtils</span> &#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">String</span> <span class="hljs-variable">TOKEN</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;token!Q@W3e4r&quot;</span>;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 生成token</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> map  //传入payload</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 返回token</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title function_">getToken</span><span class="hljs-params">(Map&lt;String,String&gt; map)</span>&#123;<br>        JWTCreator.<span class="hljs-type">Builder</span> <span class="hljs-variable">builder</span> <span class="hljs-operator">=</span> JWT.create();<br>        map.forEach((k,v)-&gt;&#123;<br>            builder.withClaim(k,v);<br>        &#125;);<br>        <span class="hljs-type">Calendar</span> <span class="hljs-variable">instance</span> <span class="hljs-operator">=</span> Calendar.getInstance();<br>        instance.add(Calendar.SECOND,<span class="hljs-number">7</span>);<br>        builder.withExpiresAt(instance.getTime());<br>        <span class="hljs-keyword">return</span> builder.sign(Algorithm.HMAC256(TOKEN)).toString();<br>    &#125;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 验证token</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> token</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">verify</span><span class="hljs-params">(String token)</span>&#123;<br>        JWT.require(Algorithm.HMAC256(TOKEN)).build().verify(token);<br>    &#125;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 获取token中payload</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> token</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> DecodedJWT <span class="hljs-title function_">getToken</span><span class="hljs-params">(String token)</span>&#123;<br>        <span class="hljs-keyword">return</span> JWT.require(Algorithm.HMAC256(TOKEN)).build().verify(token);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="7-整合springboot"><a href="#7-整合springboot" class="headerlink" title="7.整合springboot"></a>7.整合springboot</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-section"># 0.搭建springboot+mybatis+jwt环境</span><br><span class="hljs-bullet">-</span> 引入依赖<br><span class="hljs-bullet">-</span> 编写配置<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!--引入jwt--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.auth0<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>java-jwt<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.4.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><br><span class="hljs-comment">&lt;!--引入mybatis--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.mybatis.spring.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>mybatis-spring-boot-starter<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.1.3<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><br><span class="hljs-comment">&lt;!--引入lombok--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.projectlombok<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>lombok<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.18.12<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><br><span class="hljs-comment">&lt;!--引入druid--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.alibaba<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>druid<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.1.19<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><br><span class="hljs-comment">&lt;!--引入mysql--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>mysql<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>mysql-connector-java<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>5.1.38<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-attr">server.port</span>=<span class="hljs-string">8989</span><br><span class="hljs-attr">spring.application.name</span>=<span class="hljs-string">jwt</span><br><br><span class="hljs-attr">spring.datasource.type</span>=<span class="hljs-string">com.alibaba.druid.pool.DruidDataSource</span><br><span class="hljs-attr">spring.datasource.driver-class-name</span>=<span class="hljs-string">com.mysql.jdbc.Driver</span><br><span class="hljs-attr">spring.datasource.url</span>=<span class="hljs-string">jdbc:mysql://localhost:3306/jwt?characterEncoding=UTF-8</span><br><span class="hljs-attr">spring.datasource.username</span>=<span class="hljs-string">root</span><br><span class="hljs-attr">spring.datasource.password</span>=<span class="hljs-string">root</span><br><br><span class="hljs-attr">mybatis.type-aliases-package</span>=<span class="hljs-string">com.baizhi.entity</span><br><span class="hljs-attr">mybatis.mapper-locations</span>=<span class="hljs-string">classpath:com/baizhi/mapper/*.xml</span><br><br><span class="hljs-attr">logging.level.com.baizhi.dao</span>=<span class="hljs-string">debug</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-section"># 1.开发数据库</span><br><span class="hljs-bullet">-</span> 这里采用最简单的表结构验证JWT使用<br></code></pre></td></tr></table></figure>
+
+<p><img src="http://img.aismy.top/img/image-20200805212226422.png" srcset="/img/loading.gif" lazyload alt="image-20200805212226422"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">DROP</span> <span class="hljs-keyword">TABLE</span> IF <span class="hljs-keyword">EXISTS</span> `<span class="hljs-keyword">user</span>`;<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> `<span class="hljs-keyword">user</span>` (<br>  `id` <span class="hljs-type">int</span>(<span class="hljs-number">11</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> AUTO_INCREMENT COMMENT <span class="hljs-string">&#x27;主键&#x27;</span>,<br>  `name` <span class="hljs-type">varchar</span>(<span class="hljs-number">80</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;用户名&#x27;</span>,<br>  `password` <span class="hljs-type">varchar</span>(<span class="hljs-number">40</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;用户密码&#x27;</span>,<br>  <span class="hljs-keyword">PRIMARY</span> KEY (`id`)<br>) ENGINE<span class="hljs-operator">=</span>InnoDB AUTO_INCREMENT<span class="hljs-operator">=</span><span class="hljs-number">2</span> <span class="hljs-keyword">DEFAULT</span> CHARSET<span class="hljs-operator">=</span>utf8;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-section"># 2.开发entity</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Data</span><br><span class="hljs-meta">@Accessors(chain=true)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">User</span> &#123;<br>    <span class="hljs-keyword">private</span> String id;<br>    <span class="hljs-keyword">private</span> String name;<br>    <span class="hljs-keyword">private</span> String password;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>![image-20200805213539471](JWT 实战教程.assets/image-20200805213539471.png)</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-section"># 3.开发DAO接口和mapper.xml</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Mapper</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">UserDAO</span> &#123;<br>    User <span class="hljs-title function_">login</span><span class="hljs-params">(User user)</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><img src="http://img.aismy.top/img/image-20200805213603655.png" srcset="/img/loading.gif" lazyload alt="image-20200805213603655"></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">mapper</span> <span class="hljs-attr">namespace</span>=<span class="hljs-string">&quot;com.baizhi.dao.UserDAO&quot;</span>&gt;</span><br>    <span class="hljs-comment">&lt;!--这里就写的简单点了毕竟不是重点--&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;login&quot;</span> <span class="hljs-attr">parameterType</span>=<span class="hljs-string">&quot;User&quot;</span> <span class="hljs-attr">resultType</span>=<span class="hljs-string">&quot;User&quot;</span>&gt;</span><br>        select * from user where name=#&#123;name&#125; and password = #&#123;password&#125;<br>    <span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">mapper</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="http://img.aismy.top/img/image-20200805213628252.png" srcset="/img/loading.gif" lazyload alt="image-20200805213628252"></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-section"># 4.开发Service 接口以及实现类</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">UserService</span> &#123;<br>    User <span class="hljs-title function_">login</span><span class="hljs-params">(User user)</span>;<span class="hljs-comment">//登录接口</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><img src="http://img.aismy.top/img/image-20200805213648147.png" srcset="/img/loading.gif" lazyload alt="image-20200805213648147"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Service</span><br><span class="hljs-meta">@Transactional</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserServiceImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">UserService</span> &#123;<br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> UserDAO userDAO;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-meta">@Transactional(propagation = Propagation.SUPPORTS)</span><br>    <span class="hljs-keyword">public</span> User <span class="hljs-title function_">login</span><span class="hljs-params">(User user)</span> &#123;<br>        <span class="hljs-type">User</span> <span class="hljs-variable">userDB</span> <span class="hljs-operator">=</span> userDAO.login(user);<br>        <span class="hljs-keyword">if</span>(userDB!=<span class="hljs-literal">null</span>)&#123;<br>            <span class="hljs-keyword">return</span> userDB;<br>        &#125;<br>        <span class="hljs-keyword">throw</span>  <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(<span class="hljs-string">&quot;登录失败~~&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><img src="http://img.aismy.top/img/image-20200805213704965.png" srcset="/img/loading.gif" lazyload alt="image-20200805213704965"></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-section"># 5.开发controller</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@Slf4j</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserController</span> &#123;<br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> UserService userService;<br>    <span class="hljs-meta">@GetMapping(&quot;/user/login&quot;)</span><br>    <span class="hljs-keyword">public</span> Map&lt;String,Object&gt; <span class="hljs-title function_">login</span><span class="hljs-params">(User user)</span> &#123;<br>        Map&lt;String,Object&gt; result = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        log.info(<span class="hljs-string">&quot;用户名: [&#123;&#125;]&quot;</span>, user.getName());<br>        log.info(<span class="hljs-string">&quot;密码: [&#123;&#125;]&quot;</span>, user.getPassword());<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-type">User</span> <span class="hljs-variable">userDB</span> <span class="hljs-operator">=</span> userService.login(user);<br>            Map&lt;String, String&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<span class="hljs-comment">//用来存放payload</span><br>            map.put(<span class="hljs-string">&quot;id&quot;</span>,userDB.getId());<br>            map.put(<span class="hljs-string">&quot;username&quot;</span>, userDB.getName());<br>            <span class="hljs-type">String</span> <span class="hljs-variable">token</span> <span class="hljs-operator">=</span> JWTUtils.getToken(map);<br>            result.put(<span class="hljs-string">&quot;state&quot;</span>,<span class="hljs-literal">true</span>);<br>            result.put(<span class="hljs-string">&quot;msg&quot;</span>,<span class="hljs-string">&quot;登录成功!!!&quot;</span>);<br>            result.put(<span class="hljs-string">&quot;token&quot;</span>,token); <span class="hljs-comment">//成功返回token信息</span><br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            e.printStackTrace();<br>            result.put(<span class="hljs-string">&quot;state&quot;</span>,<span class="hljs-string">&quot;false&quot;</span>);<br>            result.put(<span class="hljs-string">&quot;msg&quot;</span>,e.getMessage());<br>        &#125;<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><img src="http://img.aismy.top/img/image-20200805214235426.png" srcset="/img/loading.gif" lazyload alt="image-20200805214235426"></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-section"># 6.数据库添加测试数据启动项目</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="http://img.aismy.top/img/image-20200805214324868.png" srcset="/img/loading.gif" lazyload alt="image-20200805214324868.png"></p>
+<p>![image-20200805214424786](JWT 实战教程.assets/image-20200805214424786.png)</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-section"># 7.通过postman模拟登录失败</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="http://img.aismy.top/img/image-20200805214610668.png" srcset="/img/loading.gif" lazyload alt="image-20200805214610668"></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-section"># 8.通过postman模拟登录成功</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="http://img.aismy.top/img/image-20200805214749469.png" srcset="/img/loading.gif" lazyload alt="image-20200805214749469"></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-section"># 9.编写测试接口</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@PostMapping(&quot;/test/test&quot;)</span><br><span class="hljs-keyword">public</span> Map&lt;String, Object&gt; <span class="hljs-title function_">test</span><span class="hljs-params">(String token)</span> &#123;<br>  Map&lt;String, Object&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>  <span class="hljs-keyword">try</span> &#123;<br>    JWTUtils.verify(token);<br>    map.put(<span class="hljs-string">&quot;msg&quot;</span>, <span class="hljs-string">&quot;验证通过~~~&quot;</span>);<br>    map.put(<span class="hljs-string">&quot;state&quot;</span>, <span class="hljs-literal">true</span>);<br>  &#125; <span class="hljs-keyword">catch</span> (TokenExpiredException e) &#123;<br>    map.put(<span class="hljs-string">&quot;state&quot;</span>, <span class="hljs-literal">false</span>);<br>    map.put(<span class="hljs-string">&quot;msg&quot;</span>, <span class="hljs-string">&quot;Token已经过期!!!&quot;</span>);<br>  &#125; <span class="hljs-keyword">catch</span> (SignatureVerificationException e)&#123;<br>    map.put(<span class="hljs-string">&quot;state&quot;</span>, <span class="hljs-literal">false</span>);<br>    map.put(<span class="hljs-string">&quot;msg&quot;</span>, <span class="hljs-string">&quot;签名错误!!!&quot;</span>);<br>  &#125; <span class="hljs-keyword">catch</span> (AlgorithmMismatchException e)&#123;<br>    map.put(<span class="hljs-string">&quot;state&quot;</span>, <span class="hljs-literal">false</span>);<br>    map.put(<span class="hljs-string">&quot;msg&quot;</span>, <span class="hljs-string">&quot;加密算法不匹配!!!&quot;</span>);<br>  &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>    e.printStackTrace();<br>    map.put(<span class="hljs-string">&quot;state&quot;</span>, <span class="hljs-literal">false</span>);<br>    map.put(<span class="hljs-string">&quot;msg&quot;</span>, <span class="hljs-string">&quot;无效token~~&quot;</span>);<br>  &#125;<br>  <span class="hljs-keyword">return</span> map;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><img src="http://img.aismy.top/img/image-20200805215119590.png" srcset="/img/loading.gif" lazyload alt="image-20200805215119590"></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-section"># 10.通过postman请求接口</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="http://img.aismy.top/img/image-20200805215337303.png" srcset="/img/loading.gif" lazyload alt="image-20200805215337303"></p>
+<p><img src="http://img.aismy.top/img/image-20200805215451442.png" srcset="/img/loading.gif" lazyload alt="image-20200805215451442"></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-section"># 11.问题?</span><br><span class="hljs-bullet">-</span> 使用上述方式每次都要传递token数据,每个方法都需要验证token代码冗余,不够灵活? 如何优化<br><span class="hljs-bullet">-</span> 使用拦截器进行优化<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">preHandle</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>  <span class="hljs-type">String</span> <span class="hljs-variable">token</span> <span class="hljs-operator">=</span> request.getHeader(<span class="hljs-string">&quot;token&quot;</span>);<br>  Map&lt;String,Object&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>  <span class="hljs-keyword">try</span> &#123;<br>    JWTUtils.verify(token);<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>  &#125; <span class="hljs-keyword">catch</span> (TokenExpiredException e) &#123;<br>    map.put(<span class="hljs-string">&quot;state&quot;</span>, <span class="hljs-literal">false</span>);<br>    map.put(<span class="hljs-string">&quot;msg&quot;</span>, <span class="hljs-string">&quot;Token已经过期!!!&quot;</span>);<br>  &#125; <span class="hljs-keyword">catch</span> (SignatureVerificationException e)&#123;<br>    map.put(<span class="hljs-string">&quot;state&quot;</span>, <span class="hljs-literal">false</span>);<br>    map.put(<span class="hljs-string">&quot;msg&quot;</span>, <span class="hljs-string">&quot;签名错误!!!&quot;</span>);<br>  &#125; <span class="hljs-keyword">catch</span> (AlgorithmMismatchException e)&#123;<br>    map.put(<span class="hljs-string">&quot;state&quot;</span>, <span class="hljs-literal">false</span>);<br>    map.put(<span class="hljs-string">&quot;msg&quot;</span>, <span class="hljs-string">&quot;加密算法不匹配!!!&quot;</span>);<br>  &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>    e.printStackTrace();<br>    map.put(<span class="hljs-string">&quot;state&quot;</span>, <span class="hljs-literal">false</span>);<br>    map.put(<span class="hljs-string">&quot;msg&quot;</span>, <span class="hljs-string">&quot;无效token~~&quot;</span>);<br>  &#125;<br>  <span class="hljs-type">String</span> <span class="hljs-variable">json</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ObjectMapper</span>().writeValueAsString(map);<br>  response.setContentType(<span class="hljs-string">&quot;application/json;charset=UTF-8&quot;</span>);<br>  response.getWriter().println(json);<br>  <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Component</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">InterceptorConfig</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">WebMvcConfigurer</span> &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">addInterceptors</span><span class="hljs-params">(InterceptorRegistry registry)</span> &#123;<br>        registry.addInterceptor(<span class="hljs-keyword">new</span> <span class="hljs-title class_">JwtTokenInterceptor</span>()).<br>          excludePathPatterns(<span class="hljs-string">&quot;/user/**&quot;</span>)<br>          .addPathPatterns(<span class="hljs-string">&quot;/**&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="8-jwt的框架：jjwt"><a href="#8-jwt的框架：jjwt" class="headerlink" title="8.jwt的框架：jjwt"></a>8.jwt的框架：jjwt</h2><p><code>JJWT</code>是一个提供端到端的JWT创建和验证的Java库。永远免费和开源(Apache License，版本2.0)，JJWT很容易使用和理解。它被设计成一个以建筑为中心的流畅界面，隐藏了它的大部分复杂性。</p>
+<ul>
+<li>JJWT的目标是最容易使用和理解用于在JVM上创建和验证JSON Web令牌(JWTs)的库。</li>
+<li>JJWT是基于JWT、JWS、JWE、JWK和JWA RFC规范的Java实现。</li>
+<li>JJWT还添加了一些不属于规范的便利扩展，比如JWT压缩和索赔强制。</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!--鉴权--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>io.jsonwebtoken<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>jjwt<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>0.9.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TestJWT</span> &#123;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        testCreateJWT();<br>        testParseJWT();<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testCreateJWT</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-type">JwtBuilder</span> <span class="hljs-variable">builder</span> <span class="hljs-operator">=</span> Jwts.builder()<br>                .setId(<span class="hljs-string">&quot;404&quot;</span>)                   <span class="hljs-comment">// 设置唯一编号</span><br>                .setSubject(<span class="hljs-string">&quot;邢立豹&quot;</span>)            <span class="hljs-comment">// 设置主题 可以是JSON数据</span><br>                .setIssuedAt(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>())        <span class="hljs-comment">// 设置签发日期</span><br>                <span class="hljs-comment">// .setExpiration(new Date())      // 设置过期时间</span><br>                <span class="hljs-comment">// 设置签名 使用HS256算法 并设置SecretKey(字符串)</span><br>                .signWith(SignatureAlgorithm.HS256, <span class="hljs-string">&quot;LICHUN&quot;</span>);<br><br>        HashMap&lt;String, Object&gt; userInfo = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        userInfo.put(<span class="hljs-string">&quot;name&quot;</span>,<span class="hljs-string">&quot;枯木何日可逢春&quot;</span>);<br>        userInfo.put(<span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;21&quot;</span>);<br>        builder.addClaims(userInfo);<br>        System.out.println(builder.compact());<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testParseJWT</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">str</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI0MDQiLCJzdWIiOiLpgqLnq4vosbkiLCJpYXQiOjE2MzA2ODAzNTMsImV4cCI6MTYzMDY4MDM1MywibmFtZSI6Iuaer-acqOS9leaXpeWPr-mAouaYpSIsImFnZSI6IjIxIn0.59i5xfLz9A-wTOJI9KxkF7zqp4zsLEWRC5DYlcy_Akc&quot;</span>;<br>        <span class="hljs-type">Claims</span> <span class="hljs-variable">claims</span> <span class="hljs-operator">=</span> Jwts.parser()<br>                .setSigningKey(<span class="hljs-string">&quot;LICHUN&quot;</span>)<br>                .parseClaimsJws(str)<br>                .getBody();<br>        System.out.println(claims);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="9-JWT工具类"><a href="#9-JWT工具类" class="headerlink" title="9.JWT工具类"></a>9.JWT工具类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.lichun.utils;<br><br><span class="hljs-keyword">import</span> io.jsonwebtoken.Claims;<br><span class="hljs-keyword">import</span> io.jsonwebtoken.JwtBuilder;<br><span class="hljs-keyword">import</span> io.jsonwebtoken.Jwts;<br><span class="hljs-keyword">import</span> io.jsonwebtoken.SignatureAlgorithm;<br><br><span class="hljs-keyword">import</span> javax.crypto.SecretKey;<br><span class="hljs-keyword">import</span> javax.crypto.spec.SecretKeySpec;<br><span class="hljs-keyword">import</span> java.util.Base64;<br><span class="hljs-keyword">import</span> java.util.Date;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">JWTUtil</span> &#123;<br><br>    <span class="hljs-comment">// 有效期</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">Long</span> <span class="hljs-variable">JWT_TTL</span> <span class="hljs-operator">=</span> <span class="hljs-number">3600000L</span>;<br><br>    <span class="hljs-comment">// JWT令牌信息</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">JWT_KEY</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;LICHUN&quot;</span>;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title function_">createJWT</span><span class="hljs-params">(String id, String subject, Long ttlMillis)</span> &#123;<br>        <span class="hljs-type">SignatureAlgorithm</span> <span class="hljs-variable">signatureAlgorithm</span> <span class="hljs-operator">=</span> SignatureAlgorithm.HS256;<br><br>        <span class="hljs-type">long</span> <span class="hljs-variable">nowMillis</span> <span class="hljs-operator">=</span> System.currentTimeMillis();<br>        <span class="hljs-type">Date</span> <span class="hljs-variable">now</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(nowMillis);<br><br>        <span class="hljs-keyword">if</span> (ttlMillis == <span class="hljs-literal">null</span>) &#123;<br>            ttlMillis = JWT_TTL;<br>        &#125;<br><br>        <span class="hljs-type">long</span> <span class="hljs-variable">expMillis</span> <span class="hljs-operator">=</span> nowMillis + ttlMillis;<br>        <span class="hljs-type">Date</span> <span class="hljs-variable">expDate</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(expMillis);<br><br>        <span class="hljs-type">SecretKey</span> <span class="hljs-variable">secretKey</span> <span class="hljs-operator">=</span> generalKey();<br><br>        <span class="hljs-type">JwtBuilder</span> <span class="hljs-variable">builder</span> <span class="hljs-operator">=</span> Jwts.builder()<br>                .setId(id)                      <span class="hljs-comment">// 设置唯一编号</span><br>                .setSubject(subject)            <span class="hljs-comment">// 设置主题 可以是JSON数据</span><br>                .setIssuer(<span class="hljs-string">&quot;admin&quot;</span>)<br>                .setIssuedAt(now)               <span class="hljs-comment">// 设置签发日期</span><br>                .setExpiration(expDate)         <span class="hljs-comment">// 设置过期时间</span><br>                <span class="hljs-comment">// 设置签名 使用HS256算法 并设置SecretKey(字符串)</span><br>                .signWith(SignatureAlgorithm.HS256, secretKey);<br>        <span class="hljs-keyword">return</span> builder.compact();<br><br><br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 生成加密secretKey</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> SecretKey <span class="hljs-title function_">generalKey</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-type">byte</span>[] encodedKey = Base64.getEncoder().encode(JWT_KEY.getBytes());<br>        <span class="hljs-type">SecretKey</span> <span class="hljs-variable">key</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SecretKeySpec</span>(encodedKey, <span class="hljs-number">0</span>, encodedKey.length, <span class="hljs-string">&quot;AES&quot;</span>);<br>        <span class="hljs-keyword">return</span> key;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 解析令牌数据</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Claims <span class="hljs-title function_">parseJWT</span><span class="hljs-params">(String jwt)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        <span class="hljs-type">SecretKey</span> <span class="hljs-variable">secretKey</span> <span class="hljs-operator">=</span> generalKey();<br>        <span class="hljs-keyword">return</span> Jwts.parser()<br>                .setSigningKey(secretKey)<br>                .parseClaimsJws(jwt)<br>                .getBody();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/JWT/">JWT</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/token/">token</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/02/26/JAVA%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JAVA并发编程</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/11/20/JVM/">
+                        <span class="hidden-mobile">JVM学习篇</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

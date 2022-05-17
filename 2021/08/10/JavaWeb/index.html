@@ -1,0 +1,768 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Aismy">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一、servlet1. 概述什么是servlet？ 所谓Servlet，其实就是Sun为了让Java能实现动态可交互的网页，从而进入Web编程领域而制定的一套标准！   Servlet（Server Applet），全称Java Servlet，未有中文译文。是用Java编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态Web内容。狭义的Servlet是指Java语言实现的一个接口">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaWeb">
+<meta property="og:url" content="http://example.com/2021/08/10/JavaWeb/index.html">
+<meta property="og:site_name" content="AISMY">
+<meta property="og:description" content="一、servlet1. 概述什么是servlet？ 所谓Servlet，其实就是Sun为了让Java能实现动态可交互的网页，从而进入Web编程领域而制定的一套标准！   Servlet（Server Applet），全称Java Servlet，未有中文译文。是用Java编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态Web内容。狭义的Servlet是指Java语言实现的一个接口">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://img.aismy.top/img/javaweb.jpg">
+<meta property="article:published_time" content="2021-08-09T16:02:17.000Z">
+<meta property="article:modified_time" content="2022-05-17T15:15:27.698Z">
+<meta property="article:author" content="Aismy">
+<meta property="article:tag" content="servlet">
+<meta property="article:tag" content="tomcat">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://img.aismy.top/img/javaweb.jpg">
+  
+  
+  <title>JavaWeb - AISMY</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Aismy</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://api.ixiaowai.cn/api/api.php') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JavaWeb">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-08-10 00:02" pubdate>
+        2021年8月10日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      21k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      174 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JavaWeb</h1>
+            
+            <div class="markdown-body">
+              <h1 id="一、servlet"><a href="#一、servlet" class="headerlink" title="一、servlet"></a>一、servlet</h1><h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><h3 id="什么是servlet？"><a href="#什么是servlet？" class="headerlink" title="什么是servlet？"></a>什么是servlet？</h3><blockquote>
+<p>所谓Servlet，其实就是Sun为了让Java能实现动态可交互的网页，从而进入Web编程领域而制定的一套标准！</p>
+</blockquote>
+<p> Servlet（Server Applet），全称Java Servlet，未有中文译文。是用Java编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态Web内容。狭义的Servlet是指Java语言实现的一个接口，广义的Servlet是指任何实现了这个Servlet接口的类，一般情况下，人们将Servlet理解为后者。</p>
+<p>Servlet运行于支持Java的应用服务器中。从实现上讲，Servlet可以响应任何类型的请求，但绝大多数情况下Servlet只用来扩展基于HTTP协议的Web服务器。</p>
+<p><strong>Servlet没有main方法，所以，如果要执行，则需要在一个容器里面才能执行，这个容器就是为了支持Servlet的功能而存在，Tomcat其实就是一个Servlet容器的实现</strong>。</p>
+<h3 id="Servlet的工作模式"><a href="#Servlet的工作模式" class="headerlink" title="Servlet的工作模式"></a>Servlet的工作模式</h3><ul>
+<li>客户端发送请求至服务器</li>
+<li>服务器启动并调用Servlet，Servlet根据客户端请求生成响应内容并将其传给服务器</li>
+<li>服务器将响应返回客户端</li>
+</ul>
+<p>一个Servlet主要做下面三件事情：</p>
+<ul>
+<li>创建并填充Request对象，包括：URI、参数、method、请求头信息、请求体信息等</li>
+<li>创建Response对象</li>
+<li>执行业务逻辑，将结果通过Response的输出流输出到客户端</li>
+</ul>
+<h3 id="Servlet-API-概览"><a href="#Servlet-API-概览" class="headerlink" title="Servlet API 概览"></a>Servlet API 概览</h3><p>  Servlet API 包含以下4个Java包：</p>
+<ol>
+<li><p>javax.servlet   其中包含定义servlet和servlet容器之间契约的类和接口。</p>
+</li>
+<li><p>javax.servlet.http   其中包含定义HTTP Servlet 和Servlet容器之间的关系。</p>
+</li>
+<li><p>javax.servlet.annotation   其中包含标注servlet，Filter,Listener的标注。它还为被标注元件定义元数据。</p>
+</li>
+<li><p>javax.servlet.descriptor，其中包含提供程序化登录Web应用程序的配置信息的类型。</p>
+</li>
+</ol>
+<h3 id="Servlet-的主要类型"><a href="#Servlet-的主要类型" class="headerlink" title="Servlet 的主要类型"></a>Servlet 的主要类型</h3><p><img src="http://img.aismy.top/img/20180512170931739" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h3 id="Servlet-的使用方法"><a href="#Servlet-的使用方法" class="headerlink" title="Servlet 的使用方法"></a>Servlet 的使用方法</h3><p>Servlet技术的核心是Servlet，****它是所有Servlet类必须直接或者间接实现的一个接口****。在编写实现Servlet的Servlet类时，直接实现它。在扩展实现这个这个接口的类时，间接实现它。</p>
+<p>引入Servlet依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><pre><code class="hljs xml"> <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>javax.servlet<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>servlet-api<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.0-alpha-1<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="Servlet-的工作原理"><a href="#Servlet-的工作原理" class="headerlink" title="Servlet 的工作原理"></a>Servlet 的工作原理</h3><p>Servlet接口定义了<code>Servlet</code>与<code>servlet容器</code>之间的契约。这个契约是：<strong>Servlet容器将Servlet类载入内存，并产生Servlet实例和调用它具体的方法。但是要注意的是，在一个应用程序中，每种Servlet类型只能有一个实例。</strong></p>
+<p>用户请求致使<code>Servlet</code>容器调用Servlet的Service（）方法，并传入一个ServletRequest对象和一个ServletResponse对象。ServletRequest对象和ServletResponse对象都是由Servlet容器（例如TomCat）封装好的，并不需要程序员去实现，程序员可以直接使用这两个对象。</p>
+<p>ServletRequest中封装了当前的Http请求，因此，开发人员不必解析和操作原始的Http数据。ServletResponse表示当前用户的Http响应，程序员只需直接操作ServletResponse对象就能把响应轻松的发回给用户。</p>
+<p>对于每一个应用程序，<strong>Servlet容器还会创建一个ServletContext对象。这个对象中封装了上下文（应用程序）的环境详情。每个应用程序只有一个ServletContext。每个Servlet对象也都有一个封装Servlet配置的ServletConfig对象。</strong></p>
+<p>Tomcat工作机制动画演示</p>
+<p><img src="http://img.aismy.top/img/2018120522281643.gif" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h2 id="2-Servlet接口"><a href="#2-Servlet接口" class="headerlink" title="2. Servlet接口"></a>2. Servlet接口</h2><p>在<code>Servlet</code>接口中定义了如下五个方法：</p>
+<p><img src="http://img.aismy.top/img/20220422213941.png" srcset="/img/loading.gif" lazyload alt="image-20220422213931660"></p>
+<h3 id="Servlet-的生命周期"><a href="#Servlet-的生命周期" class="headerlink" title="Servlet 的生命周期"></a>Servlet 的生命周期</h3><blockquote>
+<p>其中，init( ),service( ),destroy( )是Servlet生命周期的方法。代表了Servlet从“出生”到“工作”再到“死亡 ”的过程。Servlet容器（例如TomCat）会根据下面的规则来调用这三个方法：</p>
+</blockquote>
+<ol>
+<li><p>init( ),当Servlet第一次被请求时，Servlet容器就会开始调用这个方法来初始化一个Servlet对象出来，但是这个方法在后续请求中不会在被Servlet容器调用，就像人只能“出生”一次一样。我们可以利用init（ ）方法来执行相应的初始化工作。调用这个方法时，Servlet容器会传入一个ServletConfig对象进来从而对Servlet对象进行初始化。</p>
+</li>
+<li><p>service( )方法，每当请求Servlet时，Servlet容器就会调用这个方法。就像人一样，需要不停的接受老板的指令并且“工作”。第一次请求时，Servlet容器会先调用init( )方法初始化一个Servlet对象出来，然后会调用它的service( )方法进行工作，但在后续的请求中，Servlet容器只会调用service方法了。</p>
+</li>
+<li><p>destory,当要销毁Servlet时，Servlet容器就会调用这个方法，就如人一样，到时期了就得死亡。在卸载应用程序或者关闭Servlet容器时，就会发生这种情况，一般在这个方法中会写一些清除代码。</p>
+</li>
+</ol>
+<h3 id="Servlet-的其它两个方法"><a href="#Servlet-的其它两个方法" class="headerlink" title="Servlet 的其它两个方法"></a>Servlet 的其它两个方法</h3><ul>
+<li>getServletInfo（ ），这个方法会返回Servlet的一段描述，可以返回一段字符串。</li>
+<li>getServletConfig（ ），这个方法会返回由Servlet容器传给init（ ）方法的ServletConfig对象。</li>
+</ul>
+<h2 id="3-ServletRequset接口"><a href="#3-ServletRequset接口" class="headerlink" title="3.ServletRequset接口"></a>3.ServletRequset接口</h2><p>Servlet容器对于接受到的每一个Http请求，都会创建一个ServletRequest对象，并把这个对象传递给Servlet的Sevice( )方法。其中，ServletRequest对象内封装了关于这个请求的许多详细信息。</p>
+<p>ServletRequest接口的<code>部分内容</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">ServletRequest</span> &#123;<br>  <br>    <span class="hljs-type">int</span> <span class="hljs-title function_">getContentLength</span><span class="hljs-params">()</span>;<span class="hljs-comment">//返回请求主体的字节数</span><br> <br>    String <span class="hljs-title function_">getContentType</span><span class="hljs-params">()</span>;<span class="hljs-comment">//返回主体的MIME类型</span><br> <br>    String <span class="hljs-title function_">getParameter</span><span class="hljs-params">(String var1)</span>;<span class="hljs-comment">//返回请求参数的值</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>其中，getParameter是在ServletRequest中最常用的方法，可用于获取查询字符串的值。</p>
+<h2 id="4-ServletResponse接口"><a href="#4-ServletResponse接口" class="headerlink" title="4.ServletResponse接口"></a>4.ServletResponse接口</h2><p>javax.servlet.ServletResponse接口表示一个Servlet响应，在调用Servlet的Service( )方法前，Servlet容器会先创建一个ServletResponse对象，并把它作为第二个参数传给Service( )方法。ServletResponse隐藏了向浏览器发送响应的复杂过程。</p>
+<p>让我们也来看看ServletResponse内部定义了哪些方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">ServletResponse</span> &#123;<br>    String <span class="hljs-title function_">getCharacterEncoding</span><span class="hljs-params">()</span>;<br> <br>    String <span class="hljs-title function_">getContentType</span><span class="hljs-params">()</span>;<br> <br>    ServletOutputStream <span class="hljs-title function_">getOutputStream</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException;<br> <br>    PrintWriter <span class="hljs-title function_">getWriter</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException;<br> <br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">setCharacterEncoding</span><span class="hljs-params">(String var1)</span>;<br> <br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">setContentLength</span><span class="hljs-params">(<span class="hljs-type">int</span> var1)</span>;<br> <br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">setContentType</span><span class="hljs-params">(String var1)</span>;<br> <br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">setBufferSize</span><span class="hljs-params">(<span class="hljs-type">int</span> var1)</span>;<br> <br>    <span class="hljs-type">int</span> <span class="hljs-title function_">getBufferSize</span><span class="hljs-params">()</span>;<br> <br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">flushBuffer</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException;<br> <br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">resetBuffer</span><span class="hljs-params">()</span>;<br> <br>    <span class="hljs-type">boolean</span> <span class="hljs-title function_">isCommitted</span><span class="hljs-params">()</span>;<br> <br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">reset</span><span class="hljs-params">()</span>;<br> <br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">setLocale</span><span class="hljs-params">(Locale var1)</span>;<br> <br>    Locale <span class="hljs-title function_">getLocale</span><span class="hljs-params">()</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>其中的<code>getWriter</code>方法，它返回了一个可以向客户端发送文本的的Java.io.PrintWriter对象。默认情况下，<strong>PrintWriter对象使用ISO-8859-1编码（该编码在输入中文时会发生乱码）。</strong></p>
+<p> 在向客户端发送响应时，大多数都是使用该对象向客户端发送HTML。</p>
+<p>还有一个方法也可以用来向浏览器发送数据，它就是<code>getOutputStream</code>，从名字就可以看出这是一个二进制流对象，因此这个方法是用来发送二进制数据的。</p>
+<blockquote>
+<p>在发送任何HTML之前，应该先调用setContentType（）方法，设置响应的内容类型，并将“text/html”作为一个参数传入，这是在告诉浏览器响应的内容类型为HTML，需要以HTML的方法解释响应内容而不是普通的文本，或者也可以加上“charset=UTF-8”改变响应的编码方式以防止发生中文乱码现象。</p>
+</blockquote>
+<h2 id="5-ServletConfig接口"><a href="#5-ServletConfig接口" class="headerlink" title="5.ServletConfig接口"></a>5.ServletConfig接口</h2><p>  当Servlet容器初始化Servlet时，Servlet容器会给Servlet的init( )方式传入一个ServletConfig对象。</p>
+<p>其中几个方法如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/aismy/picture-warehouse/%E5%9B%BE%E5%83%8F1/20220422215520.png" srcset="/img/loading.gif" lazyload alt="image-20220422215517676"></p>
+<ul>
+<li>String getServletName(); 获得Servlet 在web.xml中配置的name的值</li>
+<li>ServletContext getServletContext(); 获得Servlet的ServletContext对象</li>
+<li>String getInitParameter(String name); 获得Servlet的初始化参数</li>
+<li>Enumeration getInitParameterNames(); 获得所有Servlet的初始化参数</li>
+</ul>
+<h2 id="6-ServletContext对象"><a href="#6-ServletContext对象" class="headerlink" title="6. ServletContext对象"></a>6. ServletContext对象</h2><blockquote>
+<p>web容器在启动的时候，他会为每个web程序都创建一个对应的ServletContext对象，它代表了当前的web应用；在将一个应用程序同时部署到多个容器的分布式环境中，每台Java虚拟机上的Web应用都会有一个ServletContext对象。</p>
+</blockquote>
+<p>通过在ServletConfig中调用getServletContext方法，也可以获得ServletContext对象。</p>
+<p>那么为什么要存在一个ServletContext对象呢？存在肯定是有它的道理，因为有了ServletContext对象，就可以<strong>共享从应用程序中的所有资料处访问到的信息</strong>，并且可以<strong>动态注册Web对象</strong>。前者将对象保存在ServletContext中的一个内部Map中。保存在ServletContext中的对象被称作属性。</p>
+<p>ServletContext中的下列方法负责处理属性：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">Object <span class="hljs-title function_">getAttribute</span><span class="hljs-params">(String var1)</span>;<br>Enumeration&lt;String&gt; <span class="hljs-title function_">getAttributeNames</span><span class="hljs-params">()</span>;<br><span class="hljs-keyword">void</span> <span class="hljs-title function_">setAttribute</span><span class="hljs-params">(String var1, Object var2)</span>;<br><span class="hljs-keyword">void</span> <span class="hljs-title function_">removeAttribute</span><span class="hljs-params">(String var1)</span>;<br></code></pre></td></tr></table></figure>
+
+<h3 id="6-1-共享数据"><a href="#6-1-共享数据" class="headerlink" title="6.1 共享数据"></a>6.1 共享数据</h3><p>在一个Servlet中保存的数据可以在另一个servlet中拿到</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"> <span class="hljs-comment">//放置数据的类</span><br><span class="hljs-type">ServletContext</span> <span class="hljs-variable">context</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>.getServletContext();<br>        <span class="hljs-type">String</span> <span class="hljs-variable">username</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;刘&quot;</span>;<br>        context.setAttribute(<span class="hljs-string">&quot;username&quot;</span>,username);<br><br><span class="hljs-comment">//获得数据的类</span><br>		<span class="hljs-type">ServletContext</span> <span class="hljs-variable">context</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>.getServletContext();<br>        <span class="hljs-type">String</span> <span class="hljs-variable">username</span> <span class="hljs-operator">=</span> (String) context.getAttribute(<span class="hljs-string">&quot;username&quot;</span>);<br>		resp.setContentType(<span class="hljs-string">&quot;text/html&quot;</span>);<br>        resp.setCharacterEncoding(<span class="hljs-string">&quot;utf-8&quot;</span>);<br>        resp.getWriter().print(<span class="hljs-string">&quot;名字&quot;</span>+username);<br></code></pre></td></tr></table></figure>
+
+<h3 id="6-2-获取初始化参数"><a href="#6-2-获取初始化参数" class="headerlink" title="6.2 获取初始化参数"></a>6.2 获取初始化参数</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml">//参数<br><span class="hljs-tag">&lt;<span class="hljs-name">context-param</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">param-name</span>&gt;</span>url<span class="hljs-tag">&lt;/<span class="hljs-name">param-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">param-value</span>&gt;</span>jdbc:mysql://localhost:3306<span class="hljs-tag">&lt;/<span class="hljs-name">param-value</span>&gt;</span><br> <span class="hljs-tag">&lt;/<span class="hljs-name">context-param</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//获取初始化参数</span><br><span class="hljs-type">ServletContext</span> <span class="hljs-variable">context</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>.getServletContext();<br><span class="hljs-type">String</span> <span class="hljs-variable">url</span> <span class="hljs-operator">=</span> context.getInitParameter(<span class="hljs-string">&quot;url&quot;</span>);<br>resp.getWriter().print(url);<br></code></pre></td></tr></table></figure>
+
+<h3 id="6-3-请求转发"><a href="#6-3-请求转发" class="headerlink" title="6.3 请求转发"></a>6.3 请求转发</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">ServletContext</span> <span class="hljs-variable">context</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>.getServletContext();    <br><span class="hljs-type">RequestDispatcher</span> <span class="hljs-variable">requestDispatcher</span> <span class="hljs-operator">=</span> context.getRequestDispatcher(<span class="hljs-string">&quot;/hello&quot;</span>);<br>requestDispatcher.forward(req,resp);<br></code></pre></td></tr></table></figure>
+
+<h3 id="6-4-读取资源文件"><a href="#6-4-读取资源文件" class="headerlink" title="6.4 读取资源文件"></a>6.4 读取资源文件</h3><p>properties </p>
+<ul>
+<li>在java目录中新建properties</li>
+<li>在resource目录下新建properties</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">InputStream</span> <span class="hljs-variable">is</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>.getServletContext().getResourceAsStream(<span class="hljs-string">&quot;/WEB-INF/classes/db.properties&quot;</span>);<br>        <span class="hljs-type">Properties</span> <span class="hljs-variable">properties</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Properties</span>();<br>        properties.load(is);<br>        <span class="hljs-type">String</span> <span class="hljs-variable">username</span> <span class="hljs-operator">=</span> properties.getProperty(<span class="hljs-string">&quot;username&quot;</span>);<br>        <span class="hljs-type">String</span> <span class="hljs-variable">pwd</span> <span class="hljs-operator">=</span> properties.getProperty(<span class="hljs-string">&quot;password&quot;</span>);<br>        resp.getWriter().print(username);<br>        resp.getWriter().print(pwd);<br></code></pre></td></tr></table></figure>
+
+<p>可能会出现资源导出问题，配置maven静态资源导出</p>
+<h2 id="7-GenericServlet抽象类"><a href="#7-GenericServlet抽象类" class="headerlink" title="7. GenericServlet抽象类"></a>7. GenericServlet抽象类</h2><p>前面我们编写Servlet一直是通过实现Servlet接口来编写的，但是，使用这种方法，则必须要实现Servlet接口中定义的所有的方法，即使有一些方法中没有任何东西也要去实现，并且还需要自己手动的维护ServletConfig这个对象的引用。因此，这样去实现Servlet是比较麻烦的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">init</span><span class="hljs-params">(ServletConfig config)</span> <span class="hljs-keyword">throws</span> ServletException;<br></code></pre></td></tr></table></figure>
+
+<p>幸好，GenericServlet抽象类的出现很好的解决了这个问题。本着尽可能使代码简洁的原则，GenericServlet实现了Servlet和ServletConfig接口，下面是GenericServlet抽象类的具体代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">GenericServlet</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Servlet</span>, ServletConfig, Serializable &#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">LSTRING_FILE</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;javax.servlet.LocalStrings&quot;</span>;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">ResourceBundle</span> <span class="hljs-variable">lStrings</span> <span class="hljs-operator">=</span> ResourceBundle.getBundle(<span class="hljs-string">&quot;javax.servlet.LocalStrings&quot;</span>);<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">transient</span> ServletConfig config;<br> <br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">GenericServlet</span><span class="hljs-params">()</span> &#123;<br>    &#125;<br> <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">destroy</span><span class="hljs-params">()</span> &#123;<br>    &#125;<br> <br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">getInitParameter</span><span class="hljs-params">(String name)</span> &#123;<br>        <span class="hljs-type">ServletConfig</span> <span class="hljs-variable">sc</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>.getServletConfig();<br>        <span class="hljs-keyword">if</span> (sc == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IllegalStateException</span>(lStrings.getString(<span class="hljs-string">&quot;err.servlet_config_not_initialized&quot;</span>));<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">return</span> sc.getInitParameter(name);<br>        &#125;<br>    &#125;<br> <br>    <span class="hljs-keyword">public</span> Enumeration&lt;String&gt; <span class="hljs-title function_">getInitParameterNames</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-type">ServletConfig</span> <span class="hljs-variable">sc</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>.getServletConfig();<br>        <span class="hljs-keyword">if</span> (sc == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IllegalStateException</span>(lStrings.getString(<span class="hljs-string">&quot;err.servlet_config_not_initialized&quot;</span>));<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">return</span> sc.getInitParameterNames();<br>        &#125;<br>    &#125;<br> <br>    <span class="hljs-keyword">public</span> ServletConfig <span class="hljs-title function_">getServletConfig</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.config;<br>    &#125;<br> <br>    <span class="hljs-keyword">public</span> ServletContext <span class="hljs-title function_">getServletContext</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-type">ServletConfig</span> <span class="hljs-variable">sc</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>.getServletConfig();<br>        <span class="hljs-keyword">if</span> (sc == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IllegalStateException</span>(lStrings.getString(<span class="hljs-string">&quot;err.servlet_config_not_initialized&quot;</span>));<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">return</span> sc.getServletContext();<br>        &#125;<br>    &#125;<br> <br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">getServletInfo</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>;<br>    &#125;<br> <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">init</span><span class="hljs-params">(ServletConfig config)</span> <span class="hljs-keyword">throws</span> ServletException &#123;<br>        <span class="hljs-built_in">this</span>.config = config;<br>        <span class="hljs-built_in">this</span>.init();<br>    &#125;<br> <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">init</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> ServletException &#123;<br>    &#125;<br> <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">log</span><span class="hljs-params">(String msg)</span> &#123;<br>        <span class="hljs-built_in">this</span>.getServletContext().log(<span class="hljs-built_in">this</span>.getServletName() + <span class="hljs-string">&quot;: &quot;</span> + msg);<br>    &#125;<br> <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">log</span><span class="hljs-params">(String message, Throwable t)</span> &#123;<br>        <span class="hljs-built_in">this</span>.getServletContext().log(<span class="hljs-built_in">this</span>.getServletName() + <span class="hljs-string">&quot;: &quot;</span> + message, t);<br>    &#125;<br> <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">service</span><span class="hljs-params">(ServletRequest var1, ServletResponse var2)</span> <span class="hljs-keyword">throws</span> ServletException, IOException;<br> <br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">getServletName</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-type">ServletConfig</span> <span class="hljs-variable">sc</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>.getServletConfig();<br>        <span class="hljs-keyword">if</span> (sc == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IllegalStateException</span>(lStrings.getString(<span class="hljs-string">&quot;err.servlet_config_not_initialized&quot;</span>));<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">return</span> sc.getServletName();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>其中，GenericServlet抽象类相比于直接实现Servlet接口，有以下几个好处：</p>
+</blockquote>
+<ol>
+<li><p>为Servlet接口中的所有方法提供了默认的实现，则程序员需要什么就直接改什么，不再需要把所有的方法都自己实现了。</p>
+</li>
+<li><p>提供方法，包围ServletConfig对象中的方法。</p>
+</li>
+<li><p>将init( )方法中的ServletConfig参数赋给了一个内部的ServletConfig引用从而来保存ServletConfig对象，不需要程序员自己去维护ServletConfig了。</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">init</span><span class="hljs-params">(ServletConfig config)</span> <span class="hljs-keyword">throws</span> ServletException &#123;<br>    <span class="hljs-built_in">this</span>.config = config;<br>    <span class="hljs-built_in">this</span>.init();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>但是，我们发现在GenericServlet抽象类中还存在着另一个没有任何参数的Init()方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">init</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> ServletException &#123;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>设计者的初衷到底是为了什么呢？在第一个带参数的init（）方法中就已经把ServletConfig对象传入并且通过引用保存好了，完成了Servlet的初始化过程，那么为什么后面还要加上一个不带任何参数的init（）方法呢？这不是多此一举吗？</p>
+<p>当然不是多此一举了，存在必然有存在它的道理。我们知道，<strong>抽象类是无法直接产生实例的</strong>，需要另一个类去继承这个抽象类，那么就会发生方法覆盖的问题，如果在类中覆盖了GenericServlet抽象类的init（）方法，那么程序员就必须手动的去维护ServletConfig对象了，还得调用super.init(servletConfig）方法去调用父类GenericServlet的初始化方法来保存ServletConfig对象，这样会给程序员带来很大的麻烦。GenericServlet提供的第二个不带参数的init( )方法，就是为了解决上述问题的。</p>
+<p> 这个不带参数的init（）方法，是在ServletConfig对象被赋给ServletConfig引用后，由第一个带参数的init(ServletConfig servletconfig)方法调用的，那么这意味着，当程序员如果需要覆盖这个GenericServlet的初始化方法，则只需要覆盖那个不带参数的init( )方法就好了，此时，servletConfig对象仍然有GenericServlet保存着。</p>
+<p>说了这么多，通过扩展GenericServlet抽象类，就不需要覆盖没有计划改变的方法。因此，代码将会变得更加的简洁，程序员的工作也会减少很多。</p>
+<p>然而，虽然<code>GenricServlet</code>是对Servlet一个很好的加强，但是也不经常用，因为他不像<code>HttpServlet</code>那么高级。HttpServlet才是主角，在现实的应用程序中被广泛使用。</p>
+<h2 id="8-javax-servlet-http包内容"><a href="#8-javax-servlet-http包内容" class="headerlink" title="8. javax.servlet.http包内容"></a>8. javax.servlet.http包内容</h2><p>之所以所HttpServlet要比GenericServlet强大，其实也是有道理的。HttpServlet是由GenericServlet抽象类扩展而来的，HttpServlet抽象类的声明如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HttpServlet</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">GenericServlet</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Serializable</span> <br></code></pre></td></tr></table></figure>
+
+<p>HttpServlet之所以运用广泛的另一个原因是现在大部分的应用程序都要与HTTP结合起来使用。这意味着我们可以利用HTTP的特性完成更多更强大的任务。Javax。servlet.http包是Servlet API中的第二个包，其中包含了用于编写Servlet应用程序的类和接口。Javax.servlet.http中的许多类型都覆盖了Javax.servlet中的类型。<br><img src="http://img.aismy.top/img/20180513104757248" srcset="/img/loading.gif" lazyload alt="img" style="zoom: 67%;" /></p>
+<h2 id="9-HttpServlet抽象类"><a href="#9-HttpServlet抽象类" class="headerlink" title="9. HttpServlet抽象类"></a>9. HttpServlet抽象类</h2><blockquote>
+<p>HttpServlet抽象类是继承于GenericServlet抽象类而来的。使用HttpServlet抽象类时，还需要借助分别代表Servlet请求和Servlet响应的HttpServletRequest和HttpServletResponse对象。</p>
+</blockquote>
+<ul>
+<li><code>HttpServletRequest</code>接口扩展于javax.servlet.ServletRequest接口</li>
+<li><code>HttpServletResponse</code>接口扩展于javax.servlet.servletResponse接口。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">HttpServletRequest</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">ServletRequest</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">HttpServletResponse</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">ServletResponse</span><br></code></pre></td></tr></table></figure>
+
+<p>HttpServlet抽象类覆盖了GenericServlet抽象类中的Service( )方法，并且添加了一个自己独有的Service(HttpServletRequest request，HttpServletResponse方法。</p>
+<p><strong>GenericServlet抽象类中的service方法</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">service</span><span class="hljs-params">(ServletRequest var1, ServletResponse var2)</span> <span class="hljs-keyword">throws</span> ServletException, IOException;<br></code></pre></td></tr></table></figure>
+
+<p>该方法是一个抽象方法，也就是HttpServlet要自己去实现这个service方法</p>
+<p><strong>HttpServlet中的service方法</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">service</span><span class="hljs-params">(ServletRequest req, ServletResponse res)</span> <span class="hljs-keyword">throws</span> ServletException, IOException &#123;<br>    HttpServletRequest request;<br>    HttpServletResponse response;<br>    <span class="hljs-keyword">try</span> &#123;<br>        request = (HttpServletRequest)req;<br>        response = (HttpServletResponse)res;<br>    &#125; <span class="hljs-keyword">catch</span> (ClassCastException var6) &#123;<br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ServletException</span>(<span class="hljs-string">&quot;non-HTTP request or response&quot;</span>);<br>    &#125;<br>    <span class="hljs-built_in">this</span>.service(request, response);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>我们发现，HttpServlet中的service方法把接收到的ServletRequsest类型的对象转换成了HttpServletRequest类型的对象，把ServletResponse类型的对象转换成了HttpServletResponse类型的对象。之所以能够这样强制的转换，是因为在调用Servlet的Service方法时，Servlet容器总会传入一个HttpServletRequest对象和HttpServletResponse对象，预备使用HTTP。因此，转换类型当然不会出错了。</p>
+<p>转换之后，service方法把两个转换后的对象传入了<strong>另一个service方法</strong>，那么我们再来看看这个方法是如何实现的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">service</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="hljs-keyword">throws</span> ServletException, IOException &#123;<br>    <span class="hljs-type">String</span> <span class="hljs-variable">method</span> <span class="hljs-operator">=</span> req.getMethod();<br>    <span class="hljs-type">long</span> lastModified;<br>    <span class="hljs-keyword">if</span> (method.equals(<span class="hljs-string">&quot;GET&quot;</span>)) &#123;<br>        lastModified = <span class="hljs-built_in">this</span>.getLastModified(req);<br>        <span class="hljs-keyword">if</span> (lastModified == -<span class="hljs-number">1L</span>) &#123;<br>            <span class="hljs-built_in">this</span>.doGet(req, resp);<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-type">long</span> <span class="hljs-variable">ifModifiedSince</span> <span class="hljs-operator">=</span> req.getDateHeader(<span class="hljs-string">&quot;If-Modified-Since&quot;</span>);<br>            <span class="hljs-keyword">if</span> (ifModifiedSince &lt; lastModified) &#123;<br>                <span class="hljs-built_in">this</span>.maybeSetLastModified(resp, lastModified);<br>                <span class="hljs-built_in">this</span>.doGet(req, resp);<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                resp.setStatus(<span class="hljs-number">304</span>);<br>            &#125;<br>        &#125;<br>    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (method.equals(<span class="hljs-string">&quot;HEAD&quot;</span>)) &#123;<br>        lastModified = <span class="hljs-built_in">this</span>.getLastModified(req);<br>        <span class="hljs-built_in">this</span>.maybeSetLastModified(resp, lastModified);<br>        <span class="hljs-built_in">this</span>.doHead(req, resp);<br>    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (method.equals(<span class="hljs-string">&quot;POST&quot;</span>)) &#123;<br>        <span class="hljs-built_in">this</span>.doPost(req, resp);<br>    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (method.equals(<span class="hljs-string">&quot;PUT&quot;</span>)) &#123;<br>        <span class="hljs-built_in">this</span>.doPut(req, resp);<br>    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (method.equals(<span class="hljs-string">&quot;DELETE&quot;</span>)) &#123;<br>        <span class="hljs-built_in">this</span>.doDelete(req, resp);<br>    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (method.equals(<span class="hljs-string">&quot;OPTIONS&quot;</span>)) &#123;<br>        <span class="hljs-built_in">this</span>.doOptions(req, resp);<br>    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (method.equals(<span class="hljs-string">&quot;TRACE&quot;</span>)) &#123;<br>        <span class="hljs-built_in">this</span>.doTrace(req, resp);<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">errMsg</span> <span class="hljs-operator">=</span> lStrings.getString(<span class="hljs-string">&quot;http.method_not_implemented&quot;</span>);<br>        Object[] errArgs = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[]&#123;method&#125;;<br>        errMsg = MessageFormat.format(errMsg, errArgs);<br>        resp.sendError(<span class="hljs-number">501</span>, errMsg);<br>    &#125;<br> <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p> 我们发现，这个service方法的参数是<code>HttpServletRequest</code>对象和<code>HttpServletResponse</code>对象，刚好接收了上一个service方法传过来的两个对象。</p>
+<p>接下来我们再看看service方法是如何工作的，我们会发现在service方法中还是没有任何的服务逻辑，但是却在解析HttpServletRequest中的方法参数，并调用以下方法之一：doGet,doPost,doHead,doPut,doTrace,doOptions和doDelete。这7种方法中，每一种方法都表示一个Http方法。doGet和doPost是最常用的。所以，如果我们需要实现具体的服务逻辑，不再需要覆盖service方法了，<strong>只需要覆盖doGet或者doPost就好了。</strong></p>
+<p>总之，HttpServlet有两个特性是GenericServlet所不具备的：</p>
+<p>1.不用覆盖service方法，而是覆盖doGet或者doPost方法。在少数情况，还会覆盖其他的5个方法。</p>
+<p>2.使用的是HttpServletRequest和HttpServletResponse对象。</p>
+<blockquote>
+<p>小结：</p>
+<p>HttpServlet实现Servlet接口，在HttpServlet中有两个service方法</p>
+<ul>
+<li> service(ServletRequest req, ServletResponse res) </li>
+<li> service(HttpServletRequest req, HttpServletResponse resp)</li>
+</ul>
+<p>在第一个service中拿到HttpServletRequest ，HttpServletResponse ，然后调用第二个service方法，实现转换</p>
+<p>然后在第二个service中就能拿到HttpServletRequest 和HttpServletResponse ，然后在该service方法中解析HttpServletRequest中的方法参数，判断请求类型，然后调用doGet,doPost,doHead,doPut,doTrace,doOptions和doDelete。</p>
+<p>doGet和doPost是最常用的。所以，如果我们需要实现具体的服务逻辑，不再需要覆盖service方法了，<strong>只需要覆盖doGet或者doPost就好了。</strong></p>
+</blockquote>
+<h2 id="10-HttpServletRequest接口"><a href="#10-HttpServletRequest接口" class="headerlink" title="10. HttpServletRequest接口"></a>10. HttpServletRequest接口</h2><p> HttpServletRequest表示Http环境中的Servlet请求。它扩展于javax.servlet.ServletRequest接口，并添加了几个方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java">String <span class="hljs-title function_">getContextPath</span><span class="hljs-params">()</span>;<span class="hljs-comment">//返回请求上下文的请求URI部分</span><br>Cookie[] getCookies();<span class="hljs-comment">//返回一个cookie对象数组</span><br>String <span class="hljs-title function_">getHeader</span><span class="hljs-params">(String var1)</span>;<span class="hljs-comment">//返回指定HTTP标题的值</span><br>String <span class="hljs-title function_">getMethod</span><span class="hljs-params">()</span>;<span class="hljs-comment">//返回生成这个请求HTTP的方法名称</span><br>String <span class="hljs-title function_">getQueryString</span><span class="hljs-params">()</span>;<span class="hljs-comment">//返回请求URL中的查询字符串</span><br>HttpSession <span class="hljs-title function_">getSession</span><span class="hljs-params">()</span>;<span class="hljs-comment">//返回与这个请求相关的会话对象</span><br></code></pre></td></tr></table></figure>
+
+<p>HttpServletRequest代表客户端的请求，用户通过HTTP访问服务器；http请求中的所有信息会被封装到httpservletrequest，所以我们可以通过该对象分别获得HTTP请求的请求行，请求头和请求体。</p>
+<p><img src="http://img.aismy.top/img/20180513130638615" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h3 id="10-1-通过request获得请求行"><a href="#10-1-通过request获得请求行" class="headerlink" title="10.1 通过request获得请求行"></a>10.1 通过request获得请求行</h3><p>假设查询字符串为：username=zhangsan&amp;password=123</p>
+<p>getParameter(String var1);//返回请求参数的值</p>
+<p>获得客户端的请求方式：String getMethod()</p>
+<p>获得请求的资源：</p>
+<p>String getRequestURI()</p>
+<p>StringBuffer getRequestURL()</p>
+<p>String getContextPath() —web应用的名称</p>
+<p>String getQueryString() —- get提交url地址后的参数字符串</p>
+<h3 id="10-2-通过request获得请求头"><a href="#10-2-通过request获得请求头" class="headerlink" title="10.2 通过request获得请求头"></a>10.2 通过request获得请求头</h3><p>long getDateHeader(String name)</p>
+<p>String getHeader(String name)</p>
+<p>Enumeration getHeaderNames()</p>
+<p>Enumeration getHeaders(String name)</p>
+<p>int getIntHeader(String name)</p>
+<p>referer头的作用：执行该此访问的的来源，做防盗链</p>
+<h3 id="10-3-通过request获得请求体"><a href="#10-3-通过request获得请求体" class="headerlink" title="10.3 通过request获得请求体"></a>10.3 通过request获得请求体</h3><p>请求体中的内容是通过post提交的请求参数，格式是：</p>
+<p>username=zhangsan&amp;password=123&amp;hobby=football&amp;hobby=basketball</p>
+<p>key ———————- value</p>
+<p>username                               [zhangsan]</p>
+<p>password                               [123]</p>
+<p>hobby                                          [football，basketball]                                       </p>
+<p>以上面参数为例，通过一下方法获得请求参数：</p>
+<p>String getParameter(String name)</p>
+<p>String[] getParameterValues(String name)</p>
+<p>Enumeration getParameterNames()</p>
+<p>Map&lt;String,String[]&gt; getParameterMap()<br><strong>注意：get请求方式的请求参数 上述的方法一样可以获得。</strong></p>
+<h3 id="10-4-Request乱码问题的解决方法"><a href="#10-4-Request乱码问题的解决方法" class="headerlink" title="10.4 Request乱码问题的解决方法"></a>10.4 Request乱码问题的解决方法</h3><p><strong>在service中使用的编码解码方式默认为：ISO-8859-1编码</strong>，但此编码并不支持中文，因此会出现乱码问题，所以我们需要手动修改编码方式为UTF-8编码，才能解决中文乱码问题，下面是发生乱码的具体细节：</p>
+<p><img src="http://img.aismy.top/img/20180513195355316" srcset="/img/loading.gif" lazyload alt="img"></p>
+<ul>
+<li>解决post提交方式的乱码：request.setCharacterEncoding(“UTF-8”);</li>
+<li>解决get提交的方式的乱码：parameter = newString(parameter.getbytes(“iso8859-1”),”utf-8”);</li>
+</ul>
+<h2 id="11-HttpServletResponse接口"><a href="#11-HttpServletResponse接口" class="headerlink" title="11. HttpServletResponse接口"></a>11. HttpServletResponse接口</h2><p>在Service API中，定义了一个<code>HttpServletResponse</code>接口，它继承自<code>ServletResponse</code>接口，专门用来封装HTTP响应消息。    由于HTTP请求消息分为状态行，响应消息头，响应消息体三部分，因此，HttpServletResponse接口中定义了向客户端发送响应状态码，响应消息头，响应消息体的方法。<br>web服务器接收到客户端的http请求，针对这个请求，分别创建一个代表请求的HttpServletRequest对象，代表响应的一个HttpServletResponce；</p>
+<h3 id="11-1-HttpServletResponse内封装的响应"><a href="#11-1-HttpServletResponse内封装的响应" class="headerlink" title="11.1 HttpServletResponse内封装的响应"></a>11.1 HttpServletResponse内封装的响应</h3><img src="http://img.aismy.top/img/20180513203525684" srcset="/img/loading.gif" lazyload alt="img" style="zoom:50%;" />
+
+<h3 id="11-2-通过Response设置响应"><a href="#11-2-通过Response设置响应" class="headerlink" title="11.2 通过Response设置响应"></a>11.2 通过Response设置响应</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">void</span> <span class="hljs-title function_">addCookie</span><span class="hljs-params">(Cookie var1)</span>;<span class="hljs-comment">//给这个响应添加一个cookie</span><br><span class="hljs-keyword">void</span> <span class="hljs-title function_">addHeader</span><span class="hljs-params">(String var1, String var2)</span>;<span class="hljs-comment">//给这个请求添加一个响应头</span><br><span class="hljs-keyword">void</span> <span class="hljs-title function_">sendRedirect</span><span class="hljs-params">(String var1)</span> <span class="hljs-keyword">throws</span> IOException;<span class="hljs-comment">//发送一条响应码，讲浏览器跳转到指定的位置</span><br><span class="hljs-keyword">void</span> <span class="hljs-title function_">setStatus</span><span class="hljs-params">(<span class="hljs-type">int</span> var1)</span>;<span class="hljs-comment">//设置响应行的状态码</span><br><br><span class="hljs-keyword">void</span> <span class="hljs-title function_">addHeader</span><span class="hljs-params">(String name, String value)</span><br><span class="hljs-keyword">void</span> <span class="hljs-title function_">addIntHeader</span><span class="hljs-params">(String name, <span class="hljs-type">int</span> value)</span><br><span class="hljs-keyword">void</span> <span class="hljs-title function_">addDateHeader</span><span class="hljs-params">(String name, <span class="hljs-type">long</span> date)</span><br><span class="hljs-keyword">void</span> <span class="hljs-title function_">setHeader</span><span class="hljs-params">(String name, String value)</span><br><span class="hljs-keyword">void</span> <span class="hljs-title function_">setDateHeader</span><span class="hljs-params">(String name, <span class="hljs-type">long</span> date)</span><br><span class="hljs-keyword">void</span> <span class="hljs-title function_">setIntHeader</span><span class="hljs-params">(String name, <span class="hljs-type">int</span> value)</span><br>    <br><span class="hljs-keyword">void</span> <span class="hljs-title function_">setCharacterEncoding</span><span class="hljs-params">(String var1)</span>;<br><span class="hljs-keyword">void</span> <span class="hljs-title function_">setContentLength</span><span class="hljs-params">(<span class="hljs-type">int</span> var1)</span>;<br><span class="hljs-keyword">void</span> <span class="hljs-title function_">setContentLengthLong</span><span class="hljs-params">(<span class="hljs-type">long</span> var1)</span>;<br><span class="hljs-keyword">void</span> <span class="hljs-title function_">setContentType</span><span class="hljs-params">(String var1)</span>;<br><span class="hljs-keyword">void</span> <span class="hljs-title function_">setBufferSize</span><span class="hljs-params">(<span class="hljs-type">int</span> var1)</span>;<br><span class="hljs-comment">//其中，add表示添加，而set表示设置</span><br></code></pre></td></tr></table></figure>
+
+<p>负责向浏览器发送数据的方法(发送响应消息体)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">ServletOutputStream <span class="hljs-title function_">getOutputStream</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException;<br><span class="hljs-comment">//获得字符流，通过字符流的write(String s)方法可以将字符串设置到response缓冲区中，随后Tomcat会将response缓冲区中的内容组装成Http响应返回给浏览器端。</span><br><br>PrintWriter <span class="hljs-title function_">getWriter</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException;<br><span class="hljs-comment">//获得字节流，通过该字节流的write(byte[] bytes)可以向response缓冲区中写入字节，再由Tomcat服务器将字节内容组成Http响应返回给浏览器。</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>注意：虽然response对象的getOutSream（）和getWriter（）方法都可以发送响应消息体，但是他们之间相互排斥，不可以同时使用，否则会发生异常。</strong></p>
+</blockquote>
+<h3 id="11-3-Response的乱码问题"><a href="#11-3-Response的乱码问题" class="headerlink" title="11.3 Response的乱码问题"></a>11.3 Response的乱码问题</h3><p><img src="http://img.aismy.top/img/20180513205522756" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>原因：response缓冲区的默认编码是iso8859-1，此码表中没有中文。所以需要更改response的编码方式：</p>
+<p><img src="http://img.aismy.top/img/20180513205620262" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>通过更改response的编码方式为UTF-8，任然无法解决乱码问题，因为发送端服务端虽然改变了编码方式为UTF-8，但是接收端浏览器端仍然使用GB2312编码方式解码，还是无法还原正常的中文，因此还需要告知浏览器端使用UTF-8编码去解码。</p>
+<p><img src="http://img.aismy.top/img/20180513210539156" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>上面通过调用两个方式分别改变服务端对于Response的编码方式以及浏览器的解码方式为同样的UTF-8编码来解决编码方式不一样发生乱码的问题。</p>
+<p><code>response.setContentType(&quot;text/html;charset=UTF-8&quot;)</code>这个方法包含了上面的两个方法的调用，因此在实际的开发中，只需要调用该方法即可。</p>
+<h3 id="11-4-常见应用"><a href="#11-4-常见应用" class="headerlink" title="11.4 常见应用"></a><img src="http://img.aismy.top/img/20180513204459256" srcset="/img/loading.gif" lazyload alt="img">11.4 常见应用</h3><h4 id="1、向浏览器输出信息"><a href="#1、向浏览器输出信息" class="headerlink" title="1、向浏览器输出信息"></a>1、向浏览器输出信息</h4><h4 id="2、下载文件"><a href="#2、下载文件" class="headerlink" title="2、下载文件"></a>2、下载文件</h4><ol>
+<li>要获取下载文件的路径</li>
+<li>下载的文件名是啥</li>
+<li>设置想办法让浏览器能够支持下载我们需要的东西</li>
+<li>获取下载文件的输入流</li>
+<li>创建缓冲区</li>
+<li>获取outputstream对象</li>
+<li>将fileoutputstream流写入到buffer缓冲区</li>
+<li>将缓冲区的数据输出到客户端</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//        1. 要获取下载文件的路径</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">realPath</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;E:\\workspace\\javaweb\\servlet\\target\\classes\\1630458354(1).jpg&quot;</span>;<br><span class="hljs-comment">//        2. 下载的文件名是啥</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">filename</span> <span class="hljs-operator">=</span> realPath.substring(realPath.lastIndexOf(<span class="hljs-string">&quot;\\&quot;</span>) + <span class="hljs-number">1</span>);<br><span class="hljs-comment">//        3. 设置想办法让浏览器能够支持下载我们需要的东西</span><br>        resp.setHeader(<span class="hljs-string">&quot;Content-Disposition&quot;</span>,<span class="hljs-string">&quot;attachment;filename=&quot;</span>+ URLEncoder.encode(filename,<span class="hljs-string">&quot;utf-8&quot;</span>));<br><span class="hljs-comment">//        4. 获取下载文件的输入流</span><br>        <span class="hljs-type">FileInputStream</span> <span class="hljs-variable">in</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileInputStream</span>(realPath);<br><span class="hljs-comment">//        5. 创建缓冲区</span><br>        <span class="hljs-type">int</span> len=<span class="hljs-number">0</span>;<br>        <span class="hljs-type">byte</span>[] buffer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[<span class="hljs-number">1024</span>];<br><span class="hljs-comment">//        6. 获取outputstream对象</span><br>        <span class="hljs-type">ServletOutputStream</span> <span class="hljs-variable">out</span> <span class="hljs-operator">=</span> resp.getOutputStream();<br><span class="hljs-comment">//        7. 将fileoutputstream流写入到buffer缓冲区</span><br>        <span class="hljs-keyword">while</span> ((len=in.read(buffer))!=-<span class="hljs-number">1</span>)&#123;<br>            out.write(buffer,<span class="hljs-number">0</span>,len);<br>        &#125;<br><span class="hljs-comment">//        8. 将缓冲区的数据输出到客户端</span><br>        out.close();<br>        in.close();<br></code></pre></td></tr></table></figure>
+
+<h4 id="3、验证码功能"><a href="#3、验证码功能" class="headerlink" title="3、验证码功能"></a>3、验证码功能</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//如何让浏览器自动刷新一次</span><br>     resp.setHeader(<span class="hljs-string">&quot;refresh&quot;</span>,<span class="hljs-string">&quot;5&quot;</span>);<br>     <span class="hljs-comment">//在内存中创建一个图片</span><br>     <span class="hljs-type">BufferedImage</span> <span class="hljs-variable">image</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">BufferedImage</span>(<span class="hljs-number">80</span>,<span class="hljs-number">20</span>,BufferedImage.TYPE_INT_RGB);<br>     <span class="hljs-comment">//得到图片</span><br>     <span class="hljs-type">Graphics2D</span> <span class="hljs-variable">g</span> <span class="hljs-operator">=</span> (Graphics2D) image.getGraphics();<br>     <span class="hljs-comment">//设置图片的背景颜色</span><br>     g.setColor(Color.white);<br>     g.fillRect(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">80</span>,<span class="hljs-number">20</span>);<br>     <span class="hljs-comment">//给图片写数据</span><br>     g.setColor(Color.cyan);<br>     g.setFont(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Font</span>(<span class="hljs-literal">null</span>,Font.BOLD,<span class="hljs-number">20</span>));<br>     g.drawString(makeNum(),<span class="hljs-number">0</span>,<span class="hljs-number">20</span>);<br><br>     <span class="hljs-comment">//告诉浏览器这个请求用图片的方式打开</span><br>     resp.setContentType(<span class="hljs-string">&quot;image/jpeg&quot;</span>);<br>     <span class="hljs-comment">//网站存在缓存，不让浏览器缓存</span><br>     resp.setDateHeader(<span class="hljs-string">&quot;expires&quot;</span>,-<span class="hljs-number">1</span>);<br>     resp.setHeader(<span class="hljs-string">&quot;Cache-Control&quot;</span>,<span class="hljs-string">&quot;no-cache&quot;</span>);<br>     resp.setHeader(<span class="hljs-string">&quot;Pragma&quot;</span>,<span class="hljs-string">&quot;no-cache&quot;</span>);<br><br>     <span class="hljs-comment">//把图片写给浏览器</span><br>     ImageIO.write(image, <span class="hljs-string">&quot;jpg&quot;</span>, resp.getOutputStream());<br> &#125;<br><br> <span class="hljs-comment">//创建随机数</span><br> <span class="hljs-keyword">private</span> String <span class="hljs-title function_">makeNum</span><span class="hljs-params">()</span>&#123;<br>     <span class="hljs-type">Random</span> <span class="hljs-variable">random</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();<br>     <span class="hljs-type">String</span> <span class="hljs-variable">s</span> <span class="hljs-operator">=</span> random.nextInt(<span class="hljs-number">9999999</span>)+<span class="hljs-string">&quot; &quot;</span>;<br>     <span class="hljs-type">StringBuffer</span> <span class="hljs-variable">stringBuffer</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuffer</span>();<br>     <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">7</span>-s.length(); i++) &#123;<br>         stringBuffer.append(<span class="hljs-string">&quot;0&quot;</span>);<br>     &#125;<br>     <span class="hljs-type">String</span> <span class="hljs-variable">s1</span> <span class="hljs-operator">=</span> stringBuffer.toString() + s;<br><br>     <span class="hljs-keyword">return</span> s1;<br> &#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="4、实现重定向"><a href="#4、实现重定向" class="headerlink" title="4、实现重定向"></a>4、实现重定向</h4><p>一个web资源收到客户端请求，他会通知客户端去访问另外一个web资源，这个过程叫做重定向</p>
+<p>常见场景：用户登录</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">void</span> <span class="hljs-title function_">sendRedirect</span><span class="hljs-params">(String var1)</span> <span class="hljs-keyword">throws</span> IOException;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java">  <span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doGet</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="hljs-keyword">throws</span> ServletException, IOException &#123;<br><span class="hljs-comment">//        resp.setHeader(&quot;Location&quot;,&quot;/hello&quot;);</span><br><span class="hljs-comment">//        resp.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);</span><br>        <br>        resp.sendRedirect(<span class="hljs-string">&quot;/servlet_war_exploded/hello&quot;</span>);<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>重定向和转发的区别？</p>
+<ul>
+<li><p>相同点：</p>
+<ul>
+<li>页面都会跳转</li>
+</ul>
+</li>
+<li><p>不同点：</p>
+<ul>
+<li>请求转发的时候url不会发生变化</li>
+<li>重定向的时候url会发生改变</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="12-工作流程"><a href="#12-工作流程" class="headerlink" title="12.工作流程"></a>12.工作流程</h2><p>现在，我们编写一个servlet应用，只需继承HttpServlet类，然后重写doPost()和doGet()方法</p>
+<h3 id="Response的工作流程"><a href="#Response的工作流程" class="headerlink" title="Response的工作流程"></a>Response的工作流程</h3><p><img src="http://img.aismy.top/img/20180513204718428" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h3 id="Servlet的工作流程"><a href="#Servlet的工作流程" class="headerlink" title="Servlet的工作流程"></a>Servlet的工作流程</h3><p><img src="http://img.aismy.top/img/20180513204808318" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h2 id="13-cookie、session"><a href="#13-cookie、session" class="headerlink" title="13. cookie、session"></a>13. cookie、session</h2><p>cookie和session都是用来跟踪浏览器用户身份的会话方式。</p>
+<h3 id="13-1-Cookie"><a href="#13-1-Cookie" class="headerlink" title="13.1 Cookie"></a>13.1 Cookie</h3><p>（1）浏览器端第一次发送请求到服务器端<br>（2）服务器端创建Cookie，该Cookie中包含用户的信息，然后将该Cookie发送到浏览器端<br>（3）浏览器端再次访问服务器端时会携带服务器端创建的Cookie<br>（4）服务器端通过Cookie中携带的数据区分不同的用户<br><img src="http://img.aismy.top/img/20190917204655188.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"  /></p>
+<p>相关方法：</p>
+<p>HttpServletRequest接口中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//获取客户端请求中携带的cookie</span><br>Cookie[] getCookies();<br></code></pre></td></tr></table></figure>
+
+<p>HttpServletResponse接口中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//服务器给客户端响应一个cookie</span><br><span class="hljs-keyword">void</span> <span class="hljs-title function_">addCookie</span><span class="hljs-params">(Cookie var1)</span>;<br></code></pre></td></tr></table></figure>
+
+<p>Cookie类中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//cookie中只能添加字符串val</span><br><span class="hljs-keyword">public</span> <span class="hljs-title function_">Cookie</span><span class="hljs-params">(String name, String value)</span> &#123;<br>        validation.validate(name);<br>        <span class="hljs-built_in">this</span>.name = name;<br>        <span class="hljs-built_in">this</span>.value = value;<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<p>一个网站cookie是否存在上限</p>
+<ul>
+<li>一个cookie只能保存一个信息</li>
+<li>一个web站点可以给浏览器发送多个cookie，最多存放20个cookie</li>
+<li>cookie大小限制4kb</li>
+<li>300个cookie浏览器上限</li>
+</ul>
+<p>删除cookie</p>
+<ul>
+<li>不设置有效期，关闭浏览器，自动失效；</li>
+<li>设置有效期时间为0；</li>
+</ul>
+<h3 id="13-2-Session"><a href="#13-2-Session" class="headerlink" title="13.2 Session"></a>13.2 Session</h3><p>（1）浏览器端第一次发送请求到服务器端，服务器端创建一个Session，同时会创建一个特殊的Cookie（name为JSESSIONID的固定值，value为session对象的ID），然后将该Cookie发送至浏览器端<br>（2）浏览器端发送第N（N&gt;1）次请求到服务器端,浏览器端访问服务器端时就会携带该name为JSESSIONID的Cookie对象<br>（3）服务器端根据name为JSESSIONID的Cookie中的value(sessionId),去查询Session对象，从而区分不同用户。</p>
+<ul>
+<li>name为JSESSIONID的Cookie不存在（关闭或更换浏览器），返回1中重新去创建Session与特殊的Cookie</li>
+<li>name为JSESSIONID的Cookie存在，根据value中的SessionId去寻找session对象</li>
+<li>value为SessionId不存在<strong>（Session对象默认存活30分钟）</strong>，返回1中重新去创建Session与特殊的Cookie</li>
+<li>value为SessionId存在，返回session对象</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/aismy/picture-warehouse/%E5%9B%BE%E5%83%8F1/2019091720521815.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/2019091720523621.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoZW4xMzMzMzMzNjY3Nw==,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>相关方法：</p>
+<p>HttpServletRequest类中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">HttpSession <span class="hljs-title function_">getSession</span><span class="hljs-params">()</span>;<br></code></pre></td></tr></table></figure>
+
+<p>HttpSession类中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">Object <span class="hljs-title function_">getAttribute</span><span class="hljs-params">(String var1)</span>;<br><span class="hljs-keyword">void</span> <span class="hljs-title function_">setAttribute</span><span class="hljs-params">(String var1, Object var2)</span>;<br><span class="hljs-comment">//session中可以保存对象</span><br></code></pre></td></tr></table></figure>
+
+<p>13.3 区别</p>
+<ul>
+<li>cookie数据保存在客户端，session数据保存在服务端。</li>
+</ul>
+<ul>
+<li>cookie是把用户的数据写给用户的浏览器，浏览器保存（可以保存多个）</li>
+<li>session是把用户的数据写到用户独占的session中，服务器端保存（保存重要的信息）</li>
+</ul>
+<h2 id="14-监听器"><a href="#14-监听器" class="headerlink" title="14. 监听器"></a>14. 监听器</h2><h2 id="15-拦截器"><a href="#15-拦截器" class="headerlink" title="15. 拦截器"></a>15. 拦截器</h2><h1 id="二、tomcat"><a href="#二、tomcat" class="headerlink" title="二、tomcat"></a>二、tomcat</h1>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/JAVA/">JAVA</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/servlet/">servlet</a>
+                    
+                      <a class="hover-with-bg" href="/tags/tomcat/">tomcat</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/08/17/MYSQL/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">MYSQL</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/07/10/JAVA%E9%9B%86%E5%90%88%E7%AF%87/">
+                        <span class="hidden-mobile">JAVA集合篇</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

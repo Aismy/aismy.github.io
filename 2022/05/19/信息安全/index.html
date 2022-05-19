@@ -1,0 +1,777 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Aismy">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="第一章 信息安全概述学习目标：  信息安全基本概念和范畴 信息及信息系统面临的安全威胁 安全事件的分类  1、信息安全问题及其重要性信息：一种资源和交流的对象，具有普遍性、共享性、增值性、可处理性和多 效用性，对人类社会发展具有特别重要的意义。 信息系统：有计算机及其相关配套的设备、设施构成的，按照一定的应用目标和规则对信息进行采集、加工、存储、传输、检索等处理的人机系统。 信息安全事件：由于自然">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络信息安全">
+<meta property="og:url" content="http://example.com/2022/05/19/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/index.html">
+<meta property="og:site_name" content="AISMY">
+<meta property="og:description" content="第一章 信息安全概述学习目标：  信息安全基本概念和范畴 信息及信息系统面临的安全威胁 安全事件的分类  1、信息安全问题及其重要性信息：一种资源和交流的对象，具有普遍性、共享性、增值性、可处理性和多 效用性，对人类社会发展具有特别重要的意义。 信息系统：有计算机及其相关配套的设备、设施构成的，按照一定的应用目标和规则对信息进行采集、加工、存储、传输、检索等处理的人机系统。 信息安全事件：由于自然">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://img.aismy.top/img/20220519103618.png">
+<meta property="article:published_time" content="2022-05-19T02:29:33.000Z">
+<meta property="article:modified_time" content="2022-05-19T02:36:44.851Z">
+<meta property="article:author" content="Aismy">
+<meta property="article:tag" content="网络安全">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://img.aismy.top/img/20220519103618.png">
+  
+  
+  <title>网络信息安全 - AISMY</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Aismy</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://api.ixiaowai.cn/api/api.php') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="网络信息安全">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-05-19 10:29" pubdate>
+        2022年5月19日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      9.3k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      78 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">网络信息安全</h1>
+            
+            <div class="markdown-body">
+              <h1 id="第一章-信息安全概述"><a href="#第一章-信息安全概述" class="headerlink" title="第一章 信息安全概述"></a>第一章 信息安全概述</h1><p>学习目标：</p>
+<ul>
+<li>信息安全基本概念和范畴</li>
+<li>信息及信息系统面临的安全威胁</li>
+<li>安全事件的分类</li>
+</ul>
+<h2 id="1、信息安全问题及其重要性"><a href="#1、信息安全问题及其重要性" class="headerlink" title="1、信息安全问题及其重要性"></a>1、信息安全问题及其重要性</h2><p><strong>信息：</strong>一种资源和交流的对象，具有普遍性、共享性、增值性、可处理性和多 效用性，对人类社会发展具有特别重要的意义。</p>
+<p><strong>信息系统：</strong>有计算机及其相关配套的设备、设施构成的，按照一定的应用目标和规则对信息进行采集、加工、存储、传输、检索等处理的人机系统。</p>
+<p><strong>信息安全事件：</strong>由于自然或者人为以及软硬件本身缺陷或故障的原因，对信息系统<code>造成危害</code>，或对社会<code>造成负面影响</code>的事件。</p>
+<p><strong>信息安全保障：</strong>保护信息系统和信息网络中的信息资源免受各种类型，的威胁、干扰和破坏。措施:查找、防范、阻断引起危害和影响的潜在威胁。</p>
+<h2 id="2、信息安全威胁实例"><a href="#2、信息安全威胁实例" class="headerlink" title="2、信息安全威胁实例"></a>2、信息安全威胁实例</h2><ol>
+<li><p>我的计算机是否感染了<code>病毒</code>或<code>木马</code>?</p>
+</li>
+<li><p>我在网络中传输的数据是否会被别人看到、截获(<code>拦截</code>)、篡改?</p>
+</li>
+<li><p>我从网络中接收到的数据确实来自我所信任或期望的发送者吗?我能确信接收到的数据是正确的(没有被<code>篡改</code>、不是<code>伪造</code>的)吗?</p>
+</li>
+<li><p>内部网络是否遭到<code>入侵</code>?内部服务器是否受到非法访问?内部是否被窃取或篡改?内部应用软件(如内部OA系统)是否被非法使用?</p>
+</li>
+<li><p>对外服务器是否受到破坏或干扰?网站主页是否被篡改,是否被非法外挂恶意代码?</p>
+</li>
+<li><p>我的计算机是否会<code>被盗</code>?保存有重要数据的移动硬盘或U盘丢失了怎么办?</p>
+</li>
+<li><p>我的办公室是否会漏水?供电不稳定或打雷会不会导致我的计算机的损坏?</p>
+</li>
+<li><p>如果发生地震或洪水，我的办公楼如果倒塌了，我的计算机损坏了，重要的数据就会丢失。</p>
+</li>
+</ol>
+<h2 id="3、信息安全事件分类"><a href="#3、信息安全事件分类" class="headerlink" title="3、信息安全事件分类"></a>3、信息安全事件分类</h2><p>信息安全事件分类<code>分级指南</code>(GB/Z20986-2007) 国家标准中将信息安全事件分为<code>7个基本类型</code>，每个基本类型又分为<code>若干子类</code>。</p>
+<h4 id="1-有害程序事件–Malware"><a href="#1-有害程序事件–Malware" class="headerlink" title="1.有害程序事件–Malware"></a>1.有害程序事件–Malware</h4><blockquote>
+<p>是指蓄意制造、传播有害程序(或称恶意代码、恶意软件) ,或是因受到有害程序的影响而导致的信息安全事件。</p>
+</blockquote>
+<ul>
+<li>计算机病毒(Virus)事件。</li>
+<li>蠕(worm)事件。</li>
+<li>特洛伊木马(Trojan)事件。</li>
+<li>僵尸网络(Botnet)事件。</li>
+<li>混合攻击(Hybrid Attacks)程序事件。</li>
+<li>网页内嵌恶意代码(Embedded Malicious Software)事件</li>
+<li>其它有害程序事件。</li>
+</ul>
+<h4 id="2-网络攻击事件"><a href="#2-网络攻击事件" class="headerlink" title="2.网络攻击事件"></a>2.网络攻击事件</h4><blockquote>
+<p>通过<code>网络</code>或其他技术手段，利用信息系统的<code>配置缺陷</code>、<code>协议缺陷</code>、<code>程序缺陷</code>，或使用暴力手段对信息系统实施攻击，并造成信息系统异常或对信息系统当前运行造成潜在危害的信息安全事件。</p>
+</blockquote>
+<ul>
+<li>拒绝服务攻击事件</li>
+<li>后门攻击事件</li>
+<li>漏洞攻击事件</li>
+<li>网络扫描窃听事件</li>
+<li>网络钓鱼事件</li>
+<li>干扰事件</li>
+<li>其他网络攻击事件</li>
+</ul>
+<h4 id="3-信息破坏事件"><a href="#3-信息破坏事件" class="headerlink" title="3.信息破坏事件"></a>3.信息破坏事件</h4><blockquote>
+<p>通过网络或其他技术手段，造成信息系统中的信息被<code>篡改</code>、<code>假冒</code>、<code>泄漏</code>、<code>窃取</code>等而导致的信息安全事件。</p>
+</blockquote>
+<ul>
+<li>信息篡改事件</li>
+<li>信息假冒事件</li>
+<li>信息泄漏事件</li>
+<li>信息窃取事件</li>
+<li>信息丢失事件</li>
+<li>其它信息破坏事件</li>
+</ul>
+<h4 id="4-信息内容安全事件"><a href="#4-信息内容安全事件" class="headerlink" title="4.信息内容安全事件"></a>4.信息内容安全事件</h4><blockquote>
+<p>利用信息网络发布、传播危害国家安全、社会稳定和公共利益的内容的安全事件。</p>
+</blockquote>
+<ul>
+<li>违反宪法和法律、行政法规的信息安全事件。</li>
+<li>针对社会事项进行讨论、评论形成网上敏感的舆论热点，出现一定规模炒作的信息安全事件。</li>
+<li>组织串连、煽动集会游行的信息安全事件。</li>
+<li>其他信息内容安全事件。</li>
+</ul>
+<h4 id="5-设备设施故障"><a href="#5-设备设施故障" class="headerlink" title="5.设备设施故障"></a>5.设备设施故障</h4><blockquote>
+<p>由于信息系统<code>自身故障</code>或外<code>围保障设施故障</code>而导致的信息安全事件，以及人为的使用非技术手段有意或无意的造成信息系统破坏而导致的信息安全事件。</p>
+</blockquote>
+<ul>
+<li>软硬件自身故障</li>
+<li>外围保障设施故障</li>
+<li>人为破坏事故.</li>
+<li>其它设备设施故障</li>
+</ul>
+<h4 id="6-灾害性事件"><a href="#6-灾害性事件" class="headerlink" title="6.灾害性事件"></a>6.灾害性事件</h4><blockquote>
+<p>由于不可抗力对信息系统造成物理破坏而导致的信息安全事件。灾害性事件包括水灾、台风、地震、雷击、坍塌、火灾、恐怖袭击、战争等导致的信息安全事件。</p>
+</blockquote>
+<h4 id="7-其它事件"><a href="#7-其它事件" class="headerlink" title="7.其它事件"></a>7.其它事件</h4><blockquote>
+<p>前述6个基本分类之外的信息安全事件。除了分类之外，还可以对信息安全事件分级。信息安全事件分级主要考虑三个方面的影响</p>
+</blockquote>
+<ul>
+<li>信息系统的重要程度</li>
+<li>系统损失</li>
+<li>社会影响</li>
+</ul>
+<h4 id="什么是黑客？"><a href="#什么是黑客？" class="headerlink" title="什么是黑客？"></a>什么是黑客？</h4><p>源于英文<code>Hacker</code>,原指热心于计算机技术，水平高超的电脑专家，尤其是程序设计人员。但到了今天，黑客一词已被用于泛指那些专门利用电脑搞破坏或恶作剧的家伙，对这些人的正确英文叫法是Cracker,有人译成“骇客”</p>
+<p>那些喜欢发掘程序系统内部实现细节并延展自己的能力的人;那些狂热地沉浸在编程乐趣的人;那些能够体会侵入他人系统价值的人;那些擅长快速编程的人;特定程序的专家,经常使用这种程序或在上面工作; -一个专家或某领域热衷者;一个喜欢智力挑战创造性地突破各种环境限制的人;一个恶意的爱管闲事的家伙,在网络上逡巡溜达试图发现敏感信息。</p>
+<h4 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h4><ol>
+<li><p>什么是信息系统，什么是信息系统的安全?</p>
+</li>
+<li><p>为什么说信息安全是国家安全战略?</p>
+</li>
+<li><p>请列举你所遇到过的信息安全问题，并分析其属于哪类案件事件。</p>
+</li>
+<li><p>信息安全就是只遭受病毒攻击，这种说法正确吗?</p>
+</li>
+<li><p>网络安全问题主要是由黑客攻击造成的，这种说法正确吗?</p>
+</li>
+<li><p>什么是网络舆情?有什么特点?如何监测网络舆情?请查<br>阅当前网络舆情的热点事件。</p>
+</li>
+</ol>
+<h1 id="第二章-信息安全保障体系"><a href="#第二章-信息安全保障体系" class="headerlink" title="第二章 信息安全保障体系"></a>第二章 信息安全保障体系</h1><p>本章介绍信息<code>安全保障体系</code>的概念内涵,信息系统<code>主动防御模型</code>,以及<code>信息安全风险评估</code>、<code>等级保护</code>的相关标准规范和内容。主要包括:</p>
+<ul>
+<li>信息安全涉及范畴、安全属性需求以及信息安全保障体系结构</li>
+<li>动态和可适应的信息安全防御模型</li>
+<li>风险评估、等级保护、安全测评的内容与方法</li>
+</ul>
+<h2 id="1-信息安全保障体系"><a href="#1-信息安全保障体系" class="headerlink" title="1.信息安全保障体系"></a>1.信息安全保障体系</h2><h4 id="信息安全范畴"><a href="#信息安全范畴" class="headerlink" title="信息安全范畴"></a>信息安全范畴</h4><ol>
+<li><p><strong>信息自身：</strong>文本、图形、图像、音频、视频、动画等。</p>
+</li>
+<li><p><strong>信息载体：</strong></p>
+</li>
+</ol>
+<figure class="highlight markdown"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-bullet">-</span> 物理平台<br>计算芯片: CPU、控制芯片、专用处理芯片等。<br>存储介质:内存、磁盘、光盘、U盘、磁带等。<br>通信介质:双绞线、同轴电缆、光纤、无线电波、微波、红外线等。<br>系统设备:计算机:包括个人计算机、服务器、<br>小型机、智能终端等各类计算机;<br>打印机、扫描仪、数字摄像机、智能手机等硬件设备。<br><br><span class="hljs-bullet">-</span> 软件平台<br>系统平台:操作系统、数据库系统等系统软件。<br>通信平台:通信协议及其软件。<br>网络平台:网络协议及其软件<br>应用平台:各种应用软件<br></code></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>信息环境</li>
+</ol>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-bullet">-</span> 硬环境<br>机房、电力、照明、温控、湿控、防盗、防火、防震、防水、防雷、防电磁辐.<br>射、抗电磁干扰等设施。<br><br><span class="hljs-bullet">-</span> 软环境<br>国家法律、行政法规、部门规章、政治经济、社会文化、思想意识、教育培训、人员素质、 组织机构、监督管理、安全认证等方面。<br></code></pre></td></tr></table></figure>
+
+<h4 id="信息安全属性"><a href="#信息安全属性" class="headerlink" title="信息安全属性"></a>信息安全属性</h4><ul>
+<li><code>保密性</code>(也称机密性，Confidentiality)<br>保证信息与信息系统不被非授权者所获取或利用。保密性包含数据的保密性和访问控制等方面内容。</li>
+<li><code>完整性</code>(Integrity)<br>保证信息与信息系统正确和完备，不被冒充、伪造或篡改，包括数据的完整性、系统的完整性等方面。</li>
+<li><code>鉴别性</code>(也称可认证性，Authentication )<br>保证信息与信息系统真实，包括实体身份的真实性、数据的真实性、系 统的真实性等方面。</li>
+<li><code>不可否认性</code>(不可抵赖性，Non-Repudiation)<br>建立有效的责任机制，防止用户否认其行为，这一点在电子商务中极为重要。</li>
+<li><code>可用性</code>(Availability)<br>保证信息与信息系统可被授权者在需要的时候能够访问和使用。</li>
+<li><code>可靠性</code>(Reliability)<br>保证信息系统为合法用户提供稳定、正确的信息服务。</li>
+<li><code>可追究性</code>(Accountability)<br>保证从一个实体的行为能够唯一-地追溯到该实体，它支持不可否认、故障隔离、事后恢复、攻击阻断等应用，具有威慑作用，支持法律事务，其结果可以保证一个实体对其行为负责</li>
+<li><code>可控性</code>(Controlability)<br>指对信息和信息系统实施有效的安全监控管理，防止非法利用信息和信息系统</li>
+<li><code>保障</code>(Assurance)<br>为在具体实现和实施过程中，保密性、完整性、可用性和可追究性等得到足够满足，提供信心基础。这种信心基础主要通过认证和认可来实现。</li>
+</ul>
+<h4 id="信息安全保障体系结构"><a href="#信息安全保障体系结构" class="headerlink" title="信息安全保障体系结构"></a>信息安全保障体系结构</h4><ul>
+<li>信息安全保障体系包括<code>人</code>、<code>政策</code>(包括法律、法规、制度、管理)和<code>技术</code>三大要素。</li>
+<li>主要内涵是实现<code>保密性</code>、<code>鉴别性</code>、<code>完整性</code>、<code>可用性</code>等各种安全属性。</li>
+<li>目标:保证<code>信息</code>和<code>信息系统</code>的安全性。</li>
+</ul>
+<p><img src="http://img.aismy.top/img/image-20220518221254347.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="http://img.aismy.top/img/image-20220518221411554.png" srcset="/img/loading.gif" lazyload></p>
+<img src="http://img.aismy.top/img/image-20220518221456130.png" srcset="/img/loading.gif" lazyload alt="image-20220518221456130"  />
+
+<p>GB/T9387.2-1995(ISO7498-2)信息系统一 开放系统互连基本参考模型第2部分:安全体系结构</p>
+<p><img src="http://img.aismy.top/img/image-20220518221740646.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="2、信息安全防御模型"><a href="#2、信息安全防御模型" class="headerlink" title="2、信息安全防御模型"></a>2、信息安全防御模型</h2><h4 id="主动信息安全防御模型"><a href="#主动信息安全防御模型" class="headerlink" title="主动信息安全防御模型"></a>主动信息安全防御模型</h4><p><img src="http://img.aismy.top/img/image-20220518221834626.png" srcset="/img/loading.gif" lazyload></p>
+<ol>
+<li>风险评估(Evaluation)<br>对信息系统进行全面的风险评估，这需要对信息系统应用需求、网络基础设施、外部内部环境、安全威胁、人员、政策法规、安全技术等具有全面的了解，并善于应用各种方法、手段、工具对系统风险进行人工和自动分析，给出全面细致的风险评估。</li>
+</ol>
+<ol start="2">
+<li><p>制定策略(Policy) </p>
+<ul>
+<li><code>安全策略</code>是安全模型的<code>核心</code>，防护、检测、响应和恢复各个阶段都是依据安全策略实施的，安全策略为安全管理提供管理方向和支持手段。</li>
+<li>策略体系的建立包括安全策略的制订、评估、执行等。</li>
+</ul>
+</li>
+<li><p>实施保护(Protection)<br>采用一切可能的方法、技术和手段防止信息及信息系统遭受安全威胁，减少和降低遭受入侵和攻击的可能，实现保密性、完整性、可用性、可控性和不可否认性等安全属性。</p>
+<ul>
+<li>提高边界防御能力</li>
+<li>信息处理环节的保护</li>
+<li>信息传输保护</li>
+</ul>
+</li>
+<li><p>监测(Detection)<br>在系统实施保护之后根据安全策略对信息系统实施<code>监控</code>和<code>检测</code>。</p>
+<ul>
+<li>监控是对系统运行状态进行监视和控制,发现异常,并可能作出动态调整。</li>
+<li>检测是对已部署的系统及其安全防护进行检查测量T是动态响应和加强防护的依据,是强制落实安全策略的手段。</li>
+</ul>
+</li>
+</ol>
+<ol start="5">
+<li>响应(Reaction)<br>已知一个攻击(入侵)事件发生之后所进行的处理。把系统调整到安全状态;对于危及安全的事件、行为、过程，及时做出处理,杜绝危害进一步扩大 ,力求系统保持提供正常的服务。</li>
+</ol>
+<ol start="6">
+<li>恢复(Restoration)<ul>
+<li>恢复可以分为系统恢复和信息恢复。</li>
+<li>系统恢复是指修补安全事件所利用的系统缺陷，如系统升级、软件升级和打补丁等方法去除系统漏洞或后门。</li>
+<li>信息恢复是指恢复丢失的数据。</li>
+</ul>
+</li>
+</ol>
+<h2 id="3、风险评估与等级保护"><a href="#3、风险评估与等级保护" class="headerlink" title="3、风险评估与等级保护"></a>3、风险评估与等级保护</h2><h4 id="等级保护"><a href="#等级保护" class="headerlink" title="等级保护"></a>等级保护</h4><p><img src="http://img.aismy.top/img/image-20220518223018201.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>GB17859-1999 《计算机信息系统安全保护等级划分准则》</strong></p>
+<ul>
+<li>第一级:用户自主保护级(相当于C1级)</li>
+<li>第二级:系统审计保护级(相当于C2级)</li>
+<li>第三级:安全标记保护级(相当于B1级)</li>
+<li>第四级:结构化保护级(相当于B2级)</li>
+<li>第五级:访问验证保护级(相当于B3-A1级)</li>
+</ul>
+<p><strong>国家公安部制定的信息安全相关标准</strong></p>
+<ul>
+<li>GA/T387-2002《计算机信息系统安全等级保护网络技术要求》</li>
+<li>GA/T388-2002《计算机信息系统安全等级保护操作系统技术要求》</li>
+<li>GA/T389-2002《计算机信息系统安全等级保护数据库管理系统技术要求》</li>
+<li>GA/T390-2002《计算机信息系统安全等级保护通用技术要求》</li>
+<li>GA/T391-2002《计算机信息系统安全等级保护管理要求》</li>
+</ul>
+<p><strong>公安部等四部委[2004]66号《关于信息安全等级保护工作的实施意见的通知》</strong></p>
+<p><img src="http://img.aismy.top/img/image-20220518223353597.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="风险评估"><a href="#风险评估" class="headerlink" title="风险评估"></a>风险评估</h4><p>风险评估是安全建设的出发点，遵循<code>成本/效益平衡</code>原则，通过对用户关心的<code>重要资产</code>(如信息、硬件、软件、文档、代码、服务、设备、企业形象等)的分级，对<code>安全威胁</code>(如人为威胁、自然威胁等)发生的可能性及严重性分析，对系统物理环境、硬件设备、网络平台、基础系统平台、业务应用系统、安全管理、运行措施等方面的<code>安全脆弱性</code>( 或称薄弱环节)分析，以及已有安全控制措施的确认，借助定量、定性分析的方法，推断出用户关心的重要资产当前的<code>安全风险</code>，并根据风险的严重级别制定风险处理计划，确定下一-步的安全需求方向。</p>
+<p><img src="http://img.aismy.top/img/image-20220518223540971.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="http://img.aismy.top/img/image-20220518223605387.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="http://img.aismy.top/img/image-20220518223630971.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="系统安全测评"><a href="#系统安全测评" class="headerlink" title="系统安全测评"></a>系统安全测评</h4><p>系统安全测评是指由具备检验技术能力和政府授权资格的<code>权威机构</code>(如中国信息安全测评中心)，依据国家标准、行业标准、地方标准或相关技术规范，按照严格程序对信息系统的<code>安全保障能力</code>进行的科学公正的综合测试评估活动，以帮助系统运行单位分析系统当前的安全运行状况、查找存在的安全问题，并提供安全改进建议，从而最大程度地降低系统的安全风险。</p>
+<h4 id="信息系统安全建设实施"><a href="#信息系统安全建设实施" class="headerlink" title="信息系统安全建设实施"></a>信息系统安全建设实施</h4><ul>
+<li><p>信息系统安全建设阶段划分</p>
+<ul>
+<li>规划需求阶段:定级备案、风险评估。</li>
+<li>设计开发及实施阶段:系统安全体系结构及详细实施方案的设计，采购和使用，建设安全设施，落实安全技术措施。第三方机构评审。</li>
+<li>运行维护阶段:周期性的安全测评和安全认可。</li>
+<li>废弃阶段:废弃处理对资产的影响、对信息/硬件/软件的废弃处置方面威胁、对访问控制方面的弱点进行综合风险评估.</li>
+</ul>
+</li>
+<li><p>安全是相对的，同时也是动态的，<strong>没有绝对的安全!</strong></p>
+</li>
+<li><p>安全是一个系统工程!</p>
+</li>
+<li><p>信息安全技术原则</p>
+<ul>
+<li>最小化原则</li>
+<li>分权制衡原则</li>
+<li>安全隔离原则</li>
+</ul>
+</li>
+</ul>
+<h1 id="第三章-密码技术概述"><a href="#第三章-密码技术概述" class="headerlink" title="第三章 密码技术概述"></a>第三章 密码技术概述</h1><p>本章介绍密码技术的基本概念、分类、实现和应用原理。内容包括:</p>
+<ul>
+<li>数据保密通信模型及基本术语</li>
+<li>对称密码体制及其分类与工作原理</li>
+<li>公钥密码体制及其3 C作原理</li>
+<li>数字签名技术及其特性</li>
+<li>消息完整性保护及认证</li>
+<li>如何定义和衡量密码体制的安全性</li>
+</ul>
+<h2 id="1、密码术及发展"><a href="#1、密码术及发展" class="headerlink" title="1、密码术及发展"></a>1、密码术及发展</h2><p>保密性要求即使非授权者获取了数据副本，他也无法从副本中获得有用的信息。</p>
+<p><img src="http://img.aismy.top/img/image-20220518224226229.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>古典密码</strong></p>
+<p>在这个阶段算法和秘钥都是保密的，秘钥空间较小，信息的安全性主要依赖于对于加密和解密算法的保密。</p>
+<p><strong>现代密码</strong></p>
+<ul>
+<li>1863年普鲁士人卡西斯基著《密码和破译技术》</li>
+<li>1883年法国人克尔克霍夫所著《军事密码学》。</li>
+<li>20世纪初，产生了最初的可以实用的机械式和电动式密码机，同时出现了商业密码机公司和市场。</li>
+<li>第二次世界大战德国的Enigma转轮密码机，堪称机械式古典密码的巅峰之作。</li>
+<li>1949年美国人香农(C.Shannon)发表论文《保密系统的通信理论》标志现代密码学的诞生。</li>
+</ul>
+<p><strong>密码学</strong></p>
+<ul>
+<li>已经发展成一门跨学科的学问，它以信息理论为基础，同时使用大量数学和其它领域的工具，而计算机技术和计算理论又支撑和推动了现代密码学的应用和发展。</li>
+<li>密码学包括<code>密码编码</code>学和<code>密码分析</code>学两大分支<ul>
+<li>密码编码学研究如何对信息进行加<code>解密</code></li>
+<li>密码分析学研究如何在不知道密钥的情况对密码进行<code>破译</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="2、数据保密通信系统模型"><a href="#2、数据保密通信系统模型" class="headerlink" title="2、数据保密通信系统模型"></a>2、数据保密通信系统模型</h2><p><img src="http://img.aismy.top/img/image-20220518225155163.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>保密通信系统的有关术语</strong><br><code>明文</code>(Plain text): 需要安全保护的原始信息/数据，常记为m。所有明文构成明文空间，常记为M。<br><code>密文</code>(Cipher text): 原始数据经加密变换得到的数据，常记为c。所有密文构成密文空间，常记为C。<br><code>加密</code>(Encryption): c=Ek1(m)<br><code>解密</code>(Decryption): m=Dk2(c)。<br><code>密钥</code>(Key): 用于加解密的秘密信息。所有密钥构成密钥空间，常记为K。<br><code>公众信道</code>:数据公开传递的信道，也称公共信道。<br><code>秘密信道</code>:代指安全信道，用于传递密钥。</p>
+<p><strong>密码体制(Cipher System)</strong><br>对于m∈M，k1 , k2∈K,有,五元组(M,C,K,E,D) 称为一个<code>密码体制</code>，其中E和D代表具体的密码算法- –具体的变换过程或数学方法。可以看出，加密可以看做是将密钥与明文混合变换的过程，而解密是从密文中剥离密钥的过程，因此也称脱密过程。<br><strong>Kerchhoffs假设</strong><br>一个密码体制，对于所有密钥，加密和解密算法迅速有效;密码体制的安全性不应该依赖于算法的保密，而<strong>仅依赖密钥的保密</strong></p>
+<p><strong>密码技术、密码体制与密码算法</strong><br><code>密码技术</code>是利用密码体制实现信息安全保护的技术;<br><code>密码体制</code>是使用特定密码算法实现信息安全保护的具体方法;<br><code>密码算法</code>是使用密钥实现数据加解密变换的数学处理过程<br><strong>密码体制分类(根据密钥情况分类)</strong><br><code>对称密钥密码体制</code>:加密与解密使用相同密钥(单钥)<br><code>公钥密码体制</code>:加密与解密使用不同密钥(双钥)</p>
+<h2 id="3、对称密码体制"><a href="#3、对称密码体制" class="headerlink" title="3、对称密码体制"></a>3、对称密码体制</h2><blockquote>
+<p>如何使用相同的密钥加/解密数据？</p>
+</blockquote>
+<p><strong>对称密码体制的基本特点</strong></p>
+<ul>
+<li>加密密钥与解密密钥存在明显的<code>依赖关系</code>，由其中一个可以很容易推导出另一个。</li>
+<li>实践中，对称密码体制多使用同一个密钥加密和解密，称为加解密双方共享密钥。</li>
+<li>对称密码体制也称为单钥密码体制。</li>
+</ul>
+<p><img src="http://img.aismy.top/img/image-20220518230234956.png" srcset="/img/loading.gif" lazyload alt="对称密码体制的基本模型"></p>
+<p><strong>对称密码体制分类(按加密方式)</strong><br><code>分组密码(Blockcipher)</code>:先将明文划分成若干等长的块一一分组，如每个分组长64比特、128比特，然后再分别对每个分组进行加密，得到等长的密文分组;解密过程<br>也类似。有些密码体制解密算法与加密算法完全一样，如DES等。<br><code>序列密码(Sequential cipher)</code>: 把明文以位或字节为单位进行加密，一般是与密钥(由密钥种子产生的任意长度的字节流)进行混合(如异或)获得密文序列。也称<code>流密码</code>(Stream cipher)。</p>
+<p><strong>分组密码设计的两个思想</strong><br><code>扩散(Diffusion)</code>:即将明文及密钥的影响尽可能迅速地散布到较多的输出密文中，典型操作就是“置换”(Permutation) (如重排字符顺序)<br><code>混淆(Confusion)</code>:目的在于使作用于明文的密钥和密文之间的关系复杂化，使得明文和密文、密文和密钥之间的统计相关性极小化，从而使统计分析攻击不能奏效。混淆通常采用“代换”(Substitution)操作。</p>
+<p><strong>Feistel网络结构(德国物理学家、密码学家)</strong><br>分组密码–般采用多轮相同的<code>迭代操作</code>(轮操作)，实现明文与密钥充分地混淆和扩散。<br>许多分组密码体制采用了Feistel网络结构。<br>Feistel结构保证无论轮函数F是一个如何复杂的变换过程，都不影响加密与解密过程的一致性，实现加密过程的可逆性。<br>F具有良好的非线性性，增加密码分析的难度。<br>分组密码通过多轮处理增加了混淆效果，每一轮使用不同的轮密钥( 由初始密钥扩展得到)。</p>
+<p><img src="http://img.aismy.top/img/image-20220518230956651.png" srcset="/img/loading.gif" lazyload></p>
+<p><code>序列密码</code>(流密码)将明文流和密钥流混合(-般为简单的按字节或按比特异或)产生密文流。<br><code>流密码</code>使用一个“种子密钥”产生密钥流(理论.上可以无限长度)，通信双方共享这个“种子密钥”，按相同方式产生密钥流。</p>
+<p><img src="http://img.aismy.top/img/image-20220518231124326.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="4、公钥密码体制"><a href="#4、公钥密码体制" class="headerlink" title="4、公钥密码体制"></a>4、公钥密码体制</h2><blockquote>
+<p>如何方便的管理和使用密钥？</p>
+</blockquote>
+<ul>
+<li><code>公钥密码体制</code>有两个<code>完全不同</code>的密钥，而且其中一个可以公开(公钥，常用于加密)，另一个需要保密(私钥，常用于解密)。因此，也称为双钥密码体制。</li>
+</ul>
+<p>非对称加密的公钥和私钥需要采用一种复杂的数学机制生成（密码学认为，为了较高的安全性，尽量不要自己创造加密方案）。公私钥对的生成算法依赖于单向陷门函数。</p>
+<blockquote>
+<p>单向函数：已知单向函数 f，给定任意一个输入 x，易计算输出 y=f(x)；而给定一个输出 y，假设存在 f(x)=y，很难根据 f 来计算出 x。</p>
+<p>单向陷门函数：一个较弱的单向函数。已知单向陷门函数 f，陷门 h，给定任意一个输入 x，易计算出输出 y=f(x;h)；而给定一个输出 y，假设存在 f(x;h)=y，很难根据 f 来计算出 x，但可以根据 f 和 h 来推导出 x。</p>
+<p>在这里，函数 f 的计算方法相当于公钥，陷门 h 相当于私钥。公钥 f 是公开的，任何人对已有输入，都可以用 f 加密，而要想根据加密信息还原出原信息，必须要有私钥才行。</p>
+</blockquote>
+<ul>
+<li>公钥密码的算法就是一种陷门单向函数f。即:<ul>
+<li>对f定义域中的任意x都<code>易于计算f(x)</code>，而对f值域中几乎所有的y，即使f已知要计算f-1(y)在<code>计算上</code>也是<code>不可行</code>的。</li>
+<li>当给定某些辅助信息(<code>陷门</code>)时则易于计算f-1(y)。</li>
+</ul>
+</li>
+<li>此时称f是一个陷门单向函数，辅助信息(陷门信息)作为秘密密钥。</li>
+</ul>
+<p><img src="http://img.aismy.top/img/image-20220519091407744.png" srcset="/img/loading.gif" lazyload alt="公钥密码体制"></p>
+<ul>
+<li>公钥密码体制一般要借助某个特殊的数学问题，如数论中的<code>大数分解</code>、<code>离散对数</code>等数学难解问题，构造单向函数，因此，这类密码的安全强度取决于它所依据的问题的计算复杂度。</li>
+<li>目前的公钥密码体制主要有两类:<ul>
+<li>基于<code>大整数因子分解</code>问题的公钥密码体制，如<code>RSA</code>体制</li>
+<li>基于<code>离散对数问题</code>的公钥密码体制，如ElGmal密码体制、椭圆曲线密码体制。</li>
+</ul>
+</li>
+</ul>
+<p><strong>定义:一个公钥密码体制是一个七元组(M，C, SK,PK, Gen, Enc, Dec)，其中</strong><br><code>明文空间</code>M(Message消息，或Plain text)， 需要加密的 , 消息表示为m，m∈M。<br><code>密文空间</code>C(Ciphertext)， 明文m经过加密变换为密文C，c∈C。<br><code>私钥空间</code>SK(Secret Key)与<code>公钥空间</code>PK(Public Key)。</p>
+<p><code>密钥生成算法</code>Gen(Key Generation Algorithm), 从私钥空间中随机选取一个私钥Kpri;(Private Key), Kpri:∈SK,算法Gen输出私钥Kpri和对应的公钥Kpub(Pubklic Key),Kpub∈PK。<br><code>加密算法</code>Enc(Encryption Algorithm)， 给定明文m,m∈M，输出密文c，c=Enc(m, kpub), c∈C。<br><code>解密算法</code>Dec(Decryption Algorithm), 给定密文c，c∈C，输出明文m，m=Dec(c,kpri), m∈M.</p>
+<p>在通信时，私钥仅由解密者保存，公钥由任何一个想与解密者通信的发送者（加密者）所知。可以设想一个场景:</p>
+<blockquote>
+<p>在某个自助邮局，每个通信信道都是一个邮箱，每一个邮箱所有者都在旁边立了一个牌子，上面挂着一把钥匙：这是我的公钥，发送者请将信件放入我的邮箱，并用公钥锁好。</p>
+<p>但是公钥只能加锁，并不能解锁。解锁只能由邮箱的所有者——因为只有他保存着私钥。</p>
+<p>这样，通信信息就不会被其他人截获了，这依赖于私钥的保密性。</p>
+</blockquote>
+<p><img src="http://img.aismy.top/img/public-key-cryptography.22f51898.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h4 id="公钥传输的信赖性"><a href="#公钥传输的信赖性" class="headerlink" title="公钥传输的信赖性"></a>公钥传输的信赖性</h4><p>设想一个下面的场景：</p>
+<blockquote>
+<p>客户端 C 和服务器 S 想要使用 SSL/TLS 通信，由上述 SSL/TLS 通信原理，C 需要先知道 S 的公钥，而 S 公钥的唯一获取途径，就是把 S 公钥在网络信道中传输。要注意网络信道通信中有几个前提：</p>
+<ol>
+<li>任何人都可以捕获通信包</li>
+<li>通信包的保密性由发送者设计</li>
+<li>保密算法设计方案默认为公开，而（解密）密钥默认是安全的</li>
+</ol>
+<p>因此，假设 S 公钥不做加密，在信道中传输，那么很有可能存在一个攻击者 A，发送给 C 一个诈包，假装是 S 公钥，其实是诱饵服务器 AS 的公钥。当 C 收获了 AS 的公钥（却以为是 S 的公钥），C 后续就会使用 AS 公钥对数据进行加密，并在公开信道传输，那么 A 将捕获这些加密包，用 AS 的私钥解密，就截获了 C 本要给 S 发送的内容，而 C 和 S 二人全然不知。</p>
+<p>同样的，S 公钥即使做加密，也难以避免这种信任性问题，C 被 AS 拐跑了！</p>
+</blockquote>
+<p><img src="http://img.aismy.top/img/attack1.48b62b2e.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>为了公钥传输的信赖性问题，第三方机构应运而生——证书颁发机构（CA，Certificate Authority）。CA 默认是受信任的第三方。CA 会给各个服务器颁发证书，证书存储在服务器上，并附有 CA 的<strong>电子签名</strong>（见下节）。</p>
+<p>当客户端（浏览器）向服务器发送 HTTPS 请求时，一定要先获取目标服务器的证书，并根据证书上的信息，检验证书的合法性。一旦客户端检测到证书非法，就会发生错误。客户端获取了服务器的证书后，由于证书的信任性是由第三方信赖机构认证的，而证书上又包含着服务器的公钥信息，客户端就可以放心的信任证书上的公钥就是目标服务器的公钥。</p>
+<h2 id="5、数字签名"><a href="#5、数字签名" class="headerlink" title="5、数字签名"></a>5、数字签名</h2><blockquote>
+<p>如何在电子世界中实现签名？</p>
+</blockquote>
+<p>一个假想的例子<br>路人甲要通过网络传输一份文档给路人乙，乙接收到这份文档后:<br>乙能确认这份文档的真实性吗(确实来自于甲，而不是其他人冒充甲发送的) ?<br>乙能确定这份文档的正确性码(在传输过程中没有被篡改) ?<br>甲如果否认曾经发送过该文档(实际上确实是甲发送的)怎么办?</p>
+<p>数字签名必须使用某些对于<code>签名者</code>来讲具有唯一性的信息，以防止签名和伪造和否认。<br>数字签名的生成与验证都必须是相对容易的，而且在出现纠纷时可以通过<code>可信的第三方</code>TTP仲裁。<br>公钥密码技术为数字签名提供了理论依据:公钥密码体制中的私钥是私有的、保密的，其他人无法获得，可以作为持有者的唯一性信息，作为持有者身份的唯一性表示。</p>
+<p>数字签名机制使用公钥密码技术，使得消息接收者<code>相信</code>收到的消息来自声称的消息发送者(<code>消息主体的识别与鉴别</code>)，并<code>信任</code>该消息(消息被正确地传递，没有被篡改–<code>完整性保护</code>)，同时消息签名者不能否认签发了该消息(<code>不可否认性保护</code>)。</p>
+<p><img src="http://img.aismy.top/img/image-20220519102042087.png" srcset="/img/loading.gif" lazyload alt="数字签名机制"></p>
+<p>定义:一个数字签名体制是一个七元组(M,S,SK,PK, Gen, Sig, Ver),其中<br><code>明文空间</code>M(Message消息，或Plantext), 对应需要签名的消息表示为m，m∈M。<br><code>密文空间</code>S(Signature)，明文m经过密码变换输出密文s,s∈S。<br><code>私钥空间</code>SK(Secret Key),所有可能的私钥构成。<br><code>公钥空间</code>PK(PublicKey),所有可能的公钥构成。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/05/17/SpringSecurity/">
+                        <span class="hidden-mobile">SpringSecurity</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

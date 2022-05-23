@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" href="/img/favicon.png">
+  <link rel="icon" href="/img/uugai.com_1653271536318.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -16,22 +16,22 @@
   <meta name="author" content="Aismy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Nyima    Home  Archives  Categories  Tags  Links  About   Redis学习 _  June 7, 2020 pm  12.2k 字 135 分钟 Redis学习一、Redis常用指令1234567891011121314&#x2F;&#x2F;启动容器docker run -d -p 6379:6379 -it   --name&#x3D;&quot;myredis&amp;q">
+    <meta name="description" content="Redis学习一、Redis常用指令1234567891011121314&#x2F;&#x2F;启动容器docker run -d -p 6379:6379 -it   --name&#x3D;&quot;myredis&quot;  redis输入密码：auth 密码&#x2F;&#x2F;进入redis容器docker exec -it myredis  redis-cli&#x2F;&#x2F;退出quitexit&#x2F;&#x2F;清屏clear&#x2F;&#x2F;获取帮助, 可以使用T">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis">
 <meta property="og:url" content="http://example.com/2022/03/21/Redis/index.html">
-<meta property="og:site_name" content="AISMY">
-<meta property="og:description" content="Nyima    Home  Archives  Categories  Tags  Links  About   Redis学习 _  June 7, 2020 pm  12.2k 字 135 分钟 Redis学习一、Redis常用指令1234567891011121314&#x2F;&#x2F;启动容器docker run -d -p 6379:6379 -it   --name&#x3D;&quot;myredis&amp;q">
+<meta property="og:site_name" content="Aismy&#39;s Blog">
+<meta property="og:description" content="Redis学习一、Redis常用指令1234567891011121314&#x2F;&#x2F;启动容器docker run -d -p 6379:6379 -it   --name&#x3D;&quot;myredis&quot;  redis输入密码：auth 密码&#x2F;&#x2F;进入redis容器docker exec -it myredis  redis-cli&#x2F;&#x2F;退出quitexit&#x2F;&#x2F;清屏clear&#x2F;&#x2F;获取帮助, 可以使用T">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://img.aismy.top/img/20220517234658.png">
 <meta property="article:published_time" content="2022-03-21T15:40:23.000Z">
-<meta property="article:modified_time" content="2022-05-23T01:54:22.516Z">
+<meta property="article:modified_time" content="2022-05-23T02:10:08.823Z">
 <meta property="article:author" content="Aismy">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://img.aismy.top/img/20220517234658.png">
   
   
-  <title>Redis - AISMY</title>
+  <title>Redis - Aismy&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -239,20 +239,7 @@
             <h1 style="display: none">Redis</h1>
             
             <div class="markdown-body">
-              <p><a target="_blank" rel="noopener" href="https://nyimac.gitee.io/"> <strong>Nyima</strong> </a></p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://nyimac.gitee.io/"> Home</a></li>
-<li><a target="_blank" rel="noopener" href="https://nyimac.gitee.io/archives/"> Archives</a></li>
-<li><a target="_blank" rel="noopener" href="https://nyimac.gitee.io/categories/"> Categories</a></li>
-<li><a target="_blank" rel="noopener" href="https://nyimac.gitee.io/tags/"> Tags</a></li>
-<li><a target="_blank" rel="noopener" href="https://nyimac.gitee.io/links/"> Links</a></li>
-<li><a target="_blank" rel="noopener" href="https://nyimac.gitee.io/about/"> About</a></li>
-<li></li>
-</ul>
-<p>Redis学习 _</p>
-<p> June 7, 2020 pm</p>
-<p> 12.2k 字 135 分钟</p>
-<h1 id="Redis学习"><a href="#Redis学习" class="headerlink" title="Redis学习"></a>Redis学习</h1><h2 id="一、Redis常用指令"><a href="#一、Redis常用指令" class="headerlink" title="一、Redis常用指令"></a>一、Redis常用指令</h2><figure class="highlight awk"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span>启动容器<br>docker run -d -p <span class="hljs-number">6379</span>:<span class="hljs-number">6379</span> -it   --name=<span class="hljs-string">&quot;myredis&quot;</span>  redis<br>输入密码：<br>auth 密码<br><span class="hljs-regexp">//</span>进入redis容器<br>docker exec -it myredis  redis-cli<br><span class="hljs-regexp">//</span>退出<br>quit<br><span class="hljs-keyword">exit</span><br><span class="hljs-regexp">//</span>清屏<br>clear<br><span class="hljs-regexp">//</span>获取帮助, 可以使用Tab键来切换<br>help 命令名称<br>help @组名Copy<br></code></pre></td></tr></table></figure>
+              <h1 id="Redis学习"><a href="#Redis学习" class="headerlink" title="Redis学习"></a>Redis学习</h1><h2 id="一、Redis常用指令"><a href="#一、Redis常用指令" class="headerlink" title="一、Redis常用指令"></a>一、Redis常用指令</h2><figure class="highlight awk"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span>启动容器<br>docker run -d -p <span class="hljs-number">6379</span>:<span class="hljs-number">6379</span> -it   --name=<span class="hljs-string">&quot;myredis&quot;</span>  redis<br>输入密码：<br>auth 密码<br><span class="hljs-regexp">//</span>进入redis容器<br>docker exec -it myredis  redis-cli<br><span class="hljs-regexp">//</span>退出<br>quit<br><span class="hljs-keyword">exit</span><br><span class="hljs-regexp">//</span>清屏<br>clear<br><span class="hljs-regexp">//</span>获取帮助, 可以使用Tab键来切换<br>help 命令名称<br>help @组名Copy<br></code></pre></td></tr></table></figure>
 
 <h2 id="二、数据类型"><a href="#二、数据类型" class="headerlink" title="二、数据类型"></a>二、数据类型</h2><p><strong>所有的key都为String类型，讨论数据类型是说的value的类型</strong></p>
 <h3 id="1、String"><a href="#1、String" class="headerlink" title="1、String"></a>1、String</h3><h4 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h4><figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs gams"><span class="hljs-comment">//设置String</span><br><span class="hljs-keyword">set</span> key <span class="hljs-comment">value</span><br>mset <span class="hljs-comment">key1 value1 key2 value2...</span><br><span class="hljs-comment">//设置生命周期</span><br>setex <span class="hljs-comment">key seconds value</span> <br><br><span class="hljs-comment">//得到String</span><br>get <span class="hljs-comment">key</span> <br>mget <span class="hljs-comment">key1 key2...</span><br><br><span class="hljs-comment">//删除String</span><br>del <span class="hljs-comment">key</span><br><br><span class="hljs-comment">//向字符串的后面追加字符，如果有就补在后面，如果没有就新建</span><br>append <span class="hljs-comment">key valueCopy</span><br></code></pre></td></tr></table></figure>
